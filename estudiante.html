@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Panel Estudiante</title>
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+
+    </div>
+    <header>
+        <h1 style="text-align: center;">Panel del Estudiante</h1>
+    </header>
+    <main class="panel">
+        <a href="http://localhost/PaginaWebLaboratorio/entornoVirutal.html" style="text-decoration: none; color: inherit; ">
+            <div class="card evaluaciones">
+                <i class="icon">🕶️</i>
+                <h2>Entorno de Realidad Virtual</h2>
+            </div>
+        </a>
+        <a href="http://localhost/PaginaWebLaboratorio/simulador.html" style="text-decoration: none; color: inherit; ">
+            <div class="card contenido">
+                <i class="icon">🧪</i>
+                <h2>Simulador de Estados de la Materiao</h2>
+            </div>
+        </a>
+        <a href="http://localhost/PaginaWebLaboratorio/contenidoEducativo.html" style="text-decoration: none; color: inherit; ">
+            <div class="card seguimiento">
+                <i class="icon">📚</i>
+                <h2> Contenido Educativo</h2>
+            </div>
+        </a>
+        <a href="http://localhost/PaginaWebLaboratorio/evaluaciones.html" style="text-decoration: none; color: inherit; ">
+            <div class="card proyecto">
+                <i class="icon">📝</i>
+                <h2>Evaluaciones</h2>
+            </div>
+        </a>
+        <a href="http://localhost/PaginaWebLaboratorio/informacionProyecto.html" style="text-decoration: none; color: inherit; ">
+            <div class="card proyecto">
+                <i class="icon">📊</i>
+                <h2> Información del Proyecto</h2>
+            </div>
+        </a>
+    </main>
+    <script src="js/auth.js"></script>
+    <script>
+        if (rol !== 'estudiante') {  
+            alert("Acceso denegado");
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

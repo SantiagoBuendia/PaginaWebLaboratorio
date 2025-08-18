@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Registrar nuevo Recurso</title>
+    <link rel="stylesheet" href="css/nuevoRecurso.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html"
+               onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/contenidoEducativo.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='/PaginaWebLaboratorio/img/none.png';" class="avatar">
+            </a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="perfil-container">
+        <h2>Nuevo Recurso</h2>
+
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" enctype="multipart/form-data" >
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <input type="text" id="categoria" name="categoria" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Selecciona el tipo</option>
+                    <option value="guias">Guías</option>
+                    <option value="video">Video</option>
+                    <option value="articulo web">Artículo web</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" name="autor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="palabras_clave">Palabras clave:</label>
+                <input type="text" id="palabras_clave" name="palabras_clave" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+
+            <div class="form-group" id="grupo-enlace" style="display:none;">
+                <label for="enlace">Enlace / Documento:</label>
+                <input type="url" id="enlace" name="enlace" placeholder="Pegue el enlace aquí" required>
+            </div>
+
+            <input type="hidden" name="accion" value="registrarr">
+
+            <div class="form-actions">
+                <button type="submit">Regristrar</button>
+                <button type="button" id="btn-volver">Volver</button>
+            </div>
+        </form>
+    </div>
+    <script src="js/nuevoRecurso.js"></script>
+</body>
+</html>

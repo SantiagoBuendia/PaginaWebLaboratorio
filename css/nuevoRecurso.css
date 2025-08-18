@@ -1,0 +1,221 @@
+﻿/* Reset básico */
+body, html {
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    background-color: #003366;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+/* BOTÓN VOLVER */
+#btn-volver {
+    margin: 20px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    #btn-volver:hover {
+        background-color: #0056b3;
+    }
+
+/* MENÚ DESPLEGABLE */
+.menu-desplegable-container {
+    position: relative;
+    display: inline-block;
+}
+
+.boton-menu {
+    font-size: 20px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.opciones-menu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+    .opciones-menu button {
+        background: none;
+        border: none;
+        padding: 12px;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+    }
+
+        .opciones-menu button:hover {
+            background-color: #f0f0f0;
+        }
+
+.oculto {
+    display: none;
+}
+
+
+/* MODO OSCURO */
+body.modo-oscuro {
+    background-color: #121212;
+    color: white;
+}
+
+.modo-oscuro .filtros,
+.modo-oscuro .lista-usuarios {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+.modo-oscuro input,
+.modo-oscuro select {
+    background-color: #2c2c2c;
+    color: white;
+    border-color: #555;
+}
+
+
+/* Contenedor del formulario */
+.perfil-container {
+    max-width: 450px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px 50px; /* más espacio lateral */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título */
+.perfil-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+/* Etiquetas */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Campos de texto y select */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+}
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+    }
+
+/* Botones */
+.form-actions {
+    display: flex;
+    justify-content: center; /* centrarlos si quieres */
+    gap: 10px;
+}
+
+    .form-actions button {
+        flex: none; /* no estirar */
+        padding: 5px 15px;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        width: auto;
+    }
+.btn-guardar {
+    padding: 5px 15px;
+}
+
+
+        .form-actions button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .form-actions button[type="button"] {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .form-actions button:hover {
+            transform: translateY(-1px);
+        }
+
+        .form-actions button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .form-actions button[type="button"]:hover {
+            background-color: #0056b3;
+        }

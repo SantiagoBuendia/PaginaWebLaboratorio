@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Informacion Proyecto</title>
+    <link rel="stylesheet" href="css/informacionProyecto.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/administrador.html')"><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+
+    </div>
+
+    <button id="btn-volver" onclick="volverAlMenu()">Volver</button>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <button onclick="mostrarTexto('textoDescripcion')">Descripcion</button>
+            <button onclick="mostrarTexto('textoObjetivosAlcances')">Objetivos y alcances</button>
+            <button id="btn-documentacion" onclick="mostrarTexto('textoDocumentacion')">Documentacion tecnica</button>
+            <button onclick="mostrarTexto('textoPreguntas')">Preguntas frecuentes</button>
+            <button onclick="mostrarTexto('textoCreditos')">Creditos y reconocimiento</button>
+        </div>
+
+        <div class="content" id="contenido">
+            <h2>Bienvenido</h2>
+            <p>Selecciona una opcion para ver mas informacion</p>
+        </div>
+    </div>
+
+
+    <script src="js/informacionProyecto.js"></script>
+</body>
+</html>

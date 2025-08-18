@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="css/editarPerfil.css">
+</head>
+<body>
+    <div class="perfil-container">
+        <h2>Editar Perfil</h2>
+
+        <div class="foto-perfil">
+            <img id="foto-preview" src="img/none.png" alt="Foto de perfil">
+            <input type="file" id="foto" accept="image/*">
+        </div>
+
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post">
+            <div class="form-group">
+                <label for="nombren">Nombre:</label>
+                <input type="text" id="nombren" name="nombren" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contrasenan">Nueva Contraseña:</label>
+                <input type="password" id="contrasenan" name="contrasenan">
+                <label><input type="checkbox" id="ver-contra"> Mostrar contraseña</label>
+            </div>
+
+            <div class="form-group no-editable">
+                <label>Correo:</label>
+                <span id="correo">correo@ejemplo.com</span>
+            </div>
+
+            <div class="form-group no-editable">
+                <label>Rol:</label>
+                <span id="rol-usuario">Rol</span>
+            </div>
+
+            <input type="hidden" name="accion" value="actualizaru">
+            <input type="hidden" id="id-hidden" name="id">
+
+
+            <div class="form-actions">
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="btn-volver">Volver</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/editarPerfil.js"></script>
+</body>
+</html>

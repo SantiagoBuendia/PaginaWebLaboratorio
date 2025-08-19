@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <title>Login - Laboratorio de Química</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+          rel="stylesheet" />
 </head>
 <body>
-    <div class="login-container">
+    <!--
+            <div class="login-container">
         <div class="lab-icon">🔬</div>
         <h2>Acceso Laboratorio</h2>
         <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post">
@@ -21,5 +24,69 @@
             <input type="submit" value="Ingresar">
         </form>
     </div>
+
+           -->
+    <div class="login">
+        <img src="img/fondoquimica.jpg" alt="imagen de login" class="login__img" />
+
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" class="login__form">
+
+            <h1 class="login__title">Acceso Laboratorio</h1>
+
+            <div class="login__content">
+
+                <div class="login__box">
+
+                    <i class="ri-user-3-line login__icon"></i>
+
+                    <div class="login__box-input">
+
+                        <input type="text" name="correo" id="correo" class="login__input" placeholder="Correo" required>
+
+                    </div>
+
+                </div>
+
+                <div class="login__box">
+
+                    <i class="ri-lock-2-line login__icon"></i>
+
+                    <div class="login__box-input">
+
+                        <input type="password" name="contrasena" id="contrasena" class="login__input" placeholder="Contraseña" required>
+                        <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="login__check">
+
+                <div class="login__check-group">
+
+                    <input type="checkbox" class="login_check-input" />
+                    <label class="login__check-label">Recordar</label>
+
+                </div>
+
+                <a href="#" class="login__forgot">Has olvidado tu contraseña</a>
+
+            </div>
+
+            <input type="hidden" name="accion" value="verificar">
+
+            <input type="submit" value="Ingresar" class="login__button">
+
+            <p class="login__register">
+                No tienes una cuenta? <a href="#">Registrate</a>
+            </p>
+
+        </form>
+
+    </div>
+
+    <script src="js/index.js"></script>
 </body>
 </html>

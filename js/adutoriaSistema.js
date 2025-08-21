@@ -40,9 +40,6 @@ if (rol) {
     document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
 }
 
-if (id) {
-    document.getElementById('usuario_id').value = id;
-}
 
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -171,7 +168,7 @@ function volverAlMenu() {
     window.location.href = origen;
 }
 function cargarUsuarios() {
-    fetch("/cgi-bin/PaginaWebLaboratorio.exe?accion=listaru")
+    fetch("/cgi-bin/PaginaWebLaboratorio.exe?accion=listarAu")
         .then((res) => res.text())
         .then((html) => {
             document.getElementById("tabla-usuarios").innerHTML = html;
@@ -181,12 +178,4 @@ function cargarUsuarios() {
         });
 }
 cargarUsuarios();
-
-function confirmarEliminar(idUsuario) {
-    const usuario_id = getCookie('id'); // ID del usuario logueado
-    if (confirm("¿Estás seguro de eliminar este usuario?")) {
-        window.location.href = `/cgi-bin/PaginaWebLaboratorio.exe?accion=eliminaru&id=${idUsuario}&usuario_id=${usuario_id}`;
-    }
-    return false;
-}
 

@@ -1,6 +1,40 @@
-function getParametroURL(nombre) {
+﻿function getParametroURL(nombre) {
     const params = new URLSearchParams(window.location.search);
     return params.get(nombre);
+}
+function getToken() {
+    const cookies = document.cookie.split('; ');
+    for (const c of cookies) {
+        const [key, value] = c.split('=');
+        if (key === 'token') return value;
+    }
+    return null;
+}
+
+const token = getToken();
+console.log("Token recibido:", token);
+
+if (!token) {
+    alert("No hay token. Redirigiendo...");
+    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+}
+
+
+function getCookie(nombre) {
+    const cookies = document.cookie.split('; ');
+    for (const c of cookies) {
+        const [key, value] = c.split('=');
+        if (key === nombre) return decodeURIComponent(value);
+    }
+    return null;
+}
+
+
+const id = getCookie('id');
+
+
+if (id) {
+    document.getElementById('usuario_id').value = id;
 }
 
 window.addEventListener("DOMContentLoaded", () => {

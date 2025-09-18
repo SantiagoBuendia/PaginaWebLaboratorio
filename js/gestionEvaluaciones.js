@@ -59,8 +59,7 @@ window.addEventListener('click', function (event) {
 });
 
 function volverAlMenu() {
-    const origen = localStorage.getItem('origen') || 'menu.html';
-    window.location.href = origen;
+    window.location.href = 'http://localhost/PaginaWebLaboratorio/profesor.html';
 }
 
 let modoOscuro = false;
@@ -84,33 +83,3 @@ function cambiarTexto() {
 
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
 }
-
-document.getElementById("tipo").addEventListener("change", function () {
-    const grupoEnlace = document.getElementById("grupo-enlace");
-    const enlaceInput = document.getElementById("enlace");
-
-    if (this.value === "") {
-        // Si no ha seleccionado nada, ocultar campo
-        grupoEnlace.style.display = "none";
-        enlaceInput.value = "";
-        enlaceInput.removeAttribute("accept");
-    }
-    else if (this.value === "guias") {
-        // Mostrar campo como archivo
-        grupoEnlace.style.display = "block";
-        enlaceInput.type = "file";
-        enlaceInput.removeAttribute("placeholder");
-        enlaceInput.setAttribute("accept", ".pdf,.doc,.docx");
-    }
-    else {
-        // Mostrar campo como enlace
-        grupoEnlace.style.display = "block";
-        enlaceInput.type = "url";
-        enlaceInput.setAttribute("placeholder", "Pegue el enlace aquí");
-        enlaceInput.removeAttribute("accept");
-    }
-});
-
-document.getElementById("btn-volver").addEventListener("click", () => {
-    window.location.href = "http://localhost/PaginaWebLaboratorio/contenidoEducativo.html";
-});

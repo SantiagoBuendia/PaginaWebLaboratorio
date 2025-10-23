@@ -1,15 +1,18 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Panel Profesor</title>
     <link rel="stylesheet" href="css/menu.css">
+    <!-- Enlace a Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="header">
         <div class="usuario">
-            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar">
+            </a>
             <div class="info">
                 <strong id="nombre-usuario">Nombre</strong>
                 <span id="rol-usuario">Rol</span>
@@ -23,48 +26,42 @@
                 <button onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
-
     </div>
     <header>
-        <h1 style="text-align: center;" class="panel">Panel del Profesor</h1>
+        <h1 style="text-align: center;">Panel del Profesor</h1>
     </header>
 
     <main class="panel">
-        <a href="http://localhost/PaginaWebLaboratorio/gestionEvaluaciones.html" 
+        <a href="http://localhost/PaginaWebLaboratorio/gestionEvaluaciones.html"
            onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"
            style="text-decoration: none; color: inherit; ">
             <div class="card evaluaciones">
-                <i class="icon">📝</i>
+                <i class="icon fas fa-tasks"></i>
                 <h2>Gestión de Evaluaciones</h2>
             </div>
         </a>
-        <a href="http://localhost/PaginaWebLaboratorio/contenidoEducativo.html" 
+        <a href="http://localhost/PaginaWebLaboratorio/contenidoEducativo.html"
            onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"
            style="text-decoration: none; color: inherit; ">
             <div class="card contenido">
-                <i class="icon">📚</i>
+                <i class="icon fas fa-book"></i>
                 <h2>Contenido Educativo</h2>
             </div>
         </a>
         <a href="http://localhost/PaginaWebLaboratorio/seguimiento.html" style="text-decoration: none; color: inherit; ">
             <div class="card seguimiento">
-                <i class="icon">👨‍🏫</i>
+                <i class="icon fas fa-chart-line"></i>
                 <h2>Seguimiento de Estudiantes</h2>
             </div>
         </a>
         <a href="http://localhost/PaginaWebLaboratorio/informacionProyecto.html" style="text-decoration: none; color: inherit; ">
             <div class="card proyecto">
-                <i class="icon">📊</i>
+                <i class="icon fas fa-info-circle"></i>
                 <h2>Información del Proyecto</h2>
             </div>
         </a>
     </main>
-    <script src="js/auth.js"></script>
-    <script>
-        if (rol !== 'profesor') {  
-            alert("Acceso denegado");
-            window.location.href = 'index.html';
-        }
-    </script>
+    <!-- Ya no es necesario cargar auth.js si su contenido se movió a menu.js -->
+     <script src="js/auth.js"></script> 
 </body>
 </html>

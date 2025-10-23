@@ -1,79 +1,152 @@
-﻿body
-{
-}
+﻿/* Importar una fuente de Google Fonts para un aspecto más moderno */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: 'Roboto', sans-serif; /* Usamos la fuente importada */
+    background: linear-gradient(to right, #4facfe, #00f2fe); /* Degradado de fondo */
     margin: 0;
     padding: 0;
+    display: flex; /* Para centrar el contenedor vertical y horizontalmente */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la vista */
+    color: #333;
 }
 
 .perfil-container {
-    max-width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 450px; /* Un poco más ancho */
+    width: 90%; /* Responsivo en anchos pequeños */
+    background: #ffffff;
+    padding: 30px 40px; /* Más padding */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada y suave */
+    animation: fadeIn 0.8s ease-out; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    color: #1a2a6c; /* Color más oscuro para el título */
+    font-size: 2em; /* Tamaño de fuente más grande */
+    font-weight: 700;
 }
 
 .foto-perfil {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
     .foto-perfil img {
-        width: 120px;
-        height: 120px;
+        width: 140px; /* Un poco más grande */
+        height: 140px; /* Un poco más grande */
         object-fit: cover;
         border-radius: 50%;
-        margin-bottom: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+        .foto-perfil img:hover {
+            transform: scale(1.05); /* Efecto hover */
+        }
+
+    .foto-perfil input[type="file"] {
+        display: block; /* Para centrarlo */
+        margin: 0 auto;
+        padding: 8px 0;
+        cursor: pointer;
+        font-size: 0.9em;
+        color: #555;
     }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
     .form-group label {
         display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-weight: 500; /* Peso de fuente medio */
+        margin-bottom: 8px;
+        color: #444;
     }
 
     .form-group input[type="text"],
     .form-group input[type="password"] {
-        width: 100%;
-        padding: 8px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
+        width: calc(100% - 20px); /* Ajuste para padding */
+        padding: 12px 10px; /* Más padding */
+        border-radius: 8px; /* Bordes más redondeados */
+        border: 1px solid #ddd;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #4facfe; /* Resaltar al enfocar */
+            box-shadow: 0 0 8px rgba(79, 172, 254, 0.2);
+            outline: none; /* Quitar el contorno predeterminado */
+        }
+
+    .form-group label input[type="checkbox"] { /* Estilo para el checkbox de mostrar contraseña */
+        margin-left: 10px;
+        vertical-align: middle;
     }
 
 .no-editable span {
     display: block;
-    padding: 8px;
-    background-color: #e9e9e9;
-    border-radius: 6px;
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    background-color: #eef2f7; /* Color de fondo más suave */
+    border-radius: 8px;
+    font-size: 1em;
+    color: #666;
+    border: 1px solid #e0e0e0;
 }
 
 .form-actions {
     text-align: center;
+    margin-top: 30px; /* Más espacio superior */
 }
 
     .form-actions button {
-        margin: 10px;
-        padding: 10px 20px;
+        margin: 0 10px; /* Centrar y dar espacio entre botones */
+        padding: 12px 25px; /* Más padding */
         border: none;
-        background-color: #3498db;
+        background-color: #4facfe; /* Color principal para guardar */
         color: white;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 1.1em;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(79, 172, 254, 0.3);
     }
 
-.form-actions button:hover {
-    background-color: #2980b9;
-}
+        .form-actions button:hover {
+            background-color: #00f2fe; /* Efecto hover con el otro color del degradado */
+            transform: translateY(-2px); /* Pequeña elevación */
+            box-shadow: 0 6px 15px rgba(0, 242, 254, 0.4);
+        }
+
+    /* Estilo específico para el botón Volver */
+    .form-actions #btn-volver {
+        background-color: #6c757d; /* Un color secundario */
+        box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+    }
+
+        .form-actions #btn-volver:hover {
+            background-color: #5a6268;
+            box-shadow: 0 6px 15px rgba(90, 98, 104, 0.4);
+        }

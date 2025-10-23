@@ -63,101 +63,36 @@ function toggleMenu() {
     menu.classList.toggle("oculto");
 }
 
-// Solo declara si no existe aún
-if (typeof modoOscuro === 'undefined') {
-    var modoOscuro = false;
-}
-
-
+let modoOscuro = false;
 function cambiarColor() {
     const body = document.body;
-    const header = document.querySelector('.header');
-    const cards = document.querySelectorAll('.card');
-    const panel = document.querySelector('.panel');
-    const menu = document.querySelector('.dropdown-content');
-    const contenedor_principal = document.querySelector('.contenedor-principal');
-    const lista_usuarios = document.querySelector('.lista-usuarios');
-    const registro_usuarios = document.querySelector('.registro-usuarios');
-    const form_registro = document.querySelector('#form-registro');
-    const inputs = document.querySelectorAll('input, select, textarea');
-    const ths = document.querySelectorAll("th");
-
-    if (modoOscuro) {
-        // Modo claro
-        body.style.backgroundColor = "#ffffff";
-        body.style.color = "#000000";
-
-        if (header) header.style.backgroundColor = "#003366";
-        if (panel) panel.style.backgroundColor = "transparent";
-        if (contenedor_principal) contenedor_principal.style.backgroundColor = "transparent";
-        if (lista_usuarios) lista_usuarios.style.backgroundColor = "transparent";
-        if (registro_usuarios) registro_usuarios.style.backgroundColor = "transparent";
-        if (form_registro) form_registro.style.backgroundColor = "transparent";
-
-        inputs.forEach(input => {
-            input.style.backgroundColor = "#ffffff";
-            input.style.color = "#000000";
-            input.style.borderColor = "#cccccc";
-        });
-
-        cards.forEach(card => {
-            card.style.backgroundColor = "#ffffff";
-            card.style.color = "#000000";
-        });
-
-        if (menu) {
-            menu.style.backgroundColor = "#ffffff";
-            menu.style.color = "#000000";
-        }
-
-        ths.forEach(th => {
-            th.style.backgroundColor = "#ffffff";
-            th.style.color = "#000000";
-            th.style.borderColor = "#cccccc";
-        });
-
-    } else {
-        // Modo oscuro
-        body.style.backgroundColor = "#121212";
-        body.style.color = "#ffffff";
-
-        if (header) header.style.backgroundColor = "#003366";
-        if (panel) panel.style.color = "#ffffff";
-        if (contenedor_principal) contenedor_principal.style.backgroundColor = "#1e1e1e";
-        if (lista_usuarios) lista_usuarios.style.backgroundColor = "#1e1e1e";
-        if (registro_usuarios) registro_usuarios.style.backgroundColor = "#1e1e1e";
-        if (form_registro) form_registro.style.backgroundColor = "#1e1e1e";
-
-        inputs.forEach(input => {
-            input.style.backgroundColor = "#2c2c2c";
-            input.style.color = "#ffffff";
-            input.style.borderColor = "#555";
-        });
-
-        cards.forEach(card => {
-            card.style.backgroundColor = "#1e1e1e";
-            card.style.color = "#ffffff";
-        });
-
-        if (menu) {
-            menu.style.backgroundColor = "#2c2c2c";
-            menu.style.color = "#ffffff";
-        }
-
-        ths.forEach(th => {
-            th.style.backgroundColor = "#2c2c2c";
-            th.style.color = "#ffffff";
-            th.style.borderColor = "#555";
-        });
-    }
-
+    body.classList.toggle("modo-oscuro");
     modoOscuro = !modoOscuro;
+    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+}
+
+// Cargar preferencia de modo oscuro al iniciar
+if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('modo-oscuro');
+    modoOscuro = true;
 }
 
 
+
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
+let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+
 function cambiarTexto() {
-    document.getElementById("nombre-usuario").innerText = "Admin Modificado";
-    document.getElementById("rol-usuario").innerText = "Super Admin";
+    indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
+    const tamano = tamanosTexto[indiceTamano];
+
+    const elementosAfectados = document.querySelectorAll(
+        "#nombre-usuario, #rol-usuario, h1, h2, h3, h4, label, .tab-button, .examen-card h4, .examen-card p, .opciones-menu button"
+    );
+
+    elementosAfectados.forEach(elem => {
+        elem.style.fontSize = tamano;
+    });
 }
 
 

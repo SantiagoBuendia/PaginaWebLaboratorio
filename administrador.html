@@ -5,12 +5,14 @@
     <meta charset="utf-8" />
     <title>Panel Administrador</title>
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="header">
         <div class="usuario">
-            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/administrador.html')"
-               ><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar">
+            </a>
             <div class="info">
                 <strong id="nombre-usuario">Nombre</strong>
                 <span id="rol-usuario">Rol</span>
@@ -24,7 +26,6 @@
                 <button onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
-
     </div>
 
     <header>
@@ -35,19 +36,19 @@
            onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/administrador.html')"
            style="text-decoration: none; color: inherit;">
             <div class="card evaluaciones">
-                <i class="icon">👥</i>
+                <i class="icon fas fa-users"></i>
                 <h2>Gestión de usuarios</h2>
             </div>
         </a>
         <a href="http://localhost/PaginaWebLaboratorio/auditoriaSistema.html" style="text-decoration: none; color: inherit; ">
             <div class="card contenido">
-                <i class="icon">🛡️</i>
+                <i class="icon fas fa-shield-alt"></i>
                 <h2>Auditoría del Sistema</h2>
             </div>
         </a>
         <a href="http://localhost/PaginaWebLaboratorio/informacionProyecto.html" style="text-decoration: none; color: inherit; ">
             <div class="card seguimiento">
-                <i class="icon">ℹ️</i>
+                <i class="icon fas fa-info-circle"></i>
                 <h2> Información del Proyecto</h2>
             </div>
         </a>

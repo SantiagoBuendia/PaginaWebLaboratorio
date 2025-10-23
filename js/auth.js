@@ -1,3 +1,4 @@
+﻿// ======= AUTENTICACIÓN Y CARGA DE USUARIO (Funciones comunes) =======
 function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
@@ -6,15 +7,6 @@ function getToken() {
     }
     return null;
 }
-
-const token = getToken();
-console.log("Token recibido:", token);
-
-if (!token) {
-    alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
-}
-
 
 function getCookie(nombre) {
     const cookies = document.cookie.split('; ');
@@ -25,151 +17,101 @@ function getCookie(nombre) {
     return null;
 }
 
-const nombre = getCookie('usuario');
-const rol = getCookie('rol');
-const id = getCookie('id');
+const token = getToken();
+const nombreUsuario = getCookie('usuario');
+const rolUsuario = getCookie('rol');
+const idUsuario = getCookie('id'); // ID genérico para el usuario logueado
 
-if (nombre) {
-    document.getElementById('nombre-usuario').textContent = nombre;
-    const rutaImagen = `img/${id}.png`;
-    document.getElementById('profile-pic').src = rutaImagen;
+// Redirección si no hay token (se ejecuta inmediatamente)
+if (!token) {
+    alert("Sesión expirada o no iniciada. Redirigiendo al inicio de sesión.");
+    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
 
-
-if (rol) {
-    document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
-}
-
+// ======= FUNCIONES DE INTERFAZ GENERAL =======
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
-
 
 function toggleMenu() {
     const menu = document.getElementById("opciones-menu");
     menu.classList.toggle("oculto");
 }
 
-// Solo declara si no existe a�n
-if (typeof modoOscuro === 'undefined') {
-    var modoOscuro = false;
-}
-
-
-function cambiarColor() {
-    const body = document.body;
-    const header = document.querySelector('.header');
-    const cards = document.querySelectorAll('.card');
-    const panel = document.querySelector('.panel');
-    const menu = document.querySelector('.dropdown-content');
-    const contenedor_principal = document.querySelector('.contenedor-principal');
-    const lista_usuarios = document.querySelector('.lista-usuarios');
-    const registro_usuarios = document.querySelector('.registro-usuarios');
-    const form_registro = document.querySelector('#form-registro');
-    const inputs = document.querySelectorAll('input, select, textarea');
-    const h1 = document.querySelector('h1');
-
-    if (modoOscuro) {
-        // Modo claro
-        body.style.backgroundColor = "#ffffff";
-        body.style.color = "#000000";
-
-        if (header) header.style.backgroundColor = "#003366";
-        if (panel) panel.style.backgroundColor = "transparent";
-        if (contenedor_principal) contenedor_principal.style.backgroundColor = "transparent";
-        if (lista_usuarios) lista_usuarios.style.backgroundColor = "transparent";
-        if (registro_usuarios) registro_usuarios.style.backgroundColor = "transparent";
-        if (form_registro) form_registro.style.backgroundColor = "transparent";
-        if (h1) h1.style.color = "#000000";
-
-        inputs.forEach(input => {
-            input.style.backgroundColor = "#ffffff";
-            input.style.color = "#000000";
-            input.style.borderColor = "#cccccc";
-        });
-
-        cards.forEach(card => {
-            card.style.backgroundColor = "#ffffff";
-            card.style.color = "#000000";
-        });
-
-
-        if (menu) {
-            menu.style.backgroundColor = "#ffffff";
-            menu.style.color = "#000000";
-        }
-
-    } else {
-        // Modo oscuro
-        body.style.backgroundColor = "#121212";
-        body.style.color = "#ffffff";
-
-        if (header) header.style.backgroundColor = "#003366";
-        if (panel) panel.style.color = "#ffffff";
-        if (contenedor_principal) contenedor_principal.style.backgroundColor = "#1e1e1e";
-        if (lista_usuarios) lista_usuarios.style.backgroundColor = "#1e1e1e";
-        if (registro_usuarios) registro_usuarios.style.backgroundColor = "#1e1e1e";
-        if (form_registro) form_registro.style.backgroundColor = "#1e1e1e";
-        if (h1) h1.style.color = "#ffffff";
-
-        inputs.forEach(input => {
-            input.style.backgroundColor = "#2c2c2c";
-            input.style.color = "#ffffff";
-            input.style.borderColor = "#555";
-        });
-
-        cards.forEach(card => {
-            card.style.backgroundColor = "#1e1e1e";
-            card.style.color = "#ffffff";
-        });
-
-        if (menu) {
-            menu.style.backgroundColor = "#2c2c2c";
-            menu.style.color = "#ffffff";
-        }
-    }
-
-    modoOscuro = !modoOscuro;
-}
-
-const tamanosTexto = [
-    "1rem",   // Normal
-    "1.25rem", // Mediano
-    "1.5rem"  // Grande
-];
-
-let indiceTamano = 0;
-
-
-function cambiarTexto() {
-    const tamano = tamanosTexto[indiceTamano];
-
-    // Aplica a nombre y rol
-    document.getElementById("nombre-usuario").style.fontSize = tamano;
-    document.getElementById("rol-usuario").style.fontSize = tamano;
-
-    // Aplica a todos los encabezados
-    const encabezados = document.querySelectorAll("h1, h2");
-    encabezados.forEach(elem => {
-        elem.style.fontSize = tamano;
-    });
-
-    indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
-}
-
-
-
-
-// Cierra el men� si se hace clic fuera
 window.addEventListener('click', function (event) {
     const menu = document.getElementById("opciones-menu");
     const boton = document.querySelector(".boton-menu");
     if (!menu.contains(event.target) && !boton.contains(event.target)) {
         menu.classList.add("oculto");
+    }
+});
+
+// Cierra el menú si se hace clic fuera
+window.addEventListener('click', function (event) {
+    const menu = document.getElementById("opciones-menu");
+    const boton = document.querySelector(".boton-menu");
+    // Asegúrate de que el menú exista antes de intentar usarlo
+    if (menu && boton && !menu.contains(event.target) && !boton.contains(event.target)) {
+        menu.classList.add("oculto");
+    }
+});
+
+let modoOscuro = false; // Variable para controlar el estado del modo oscuro
+
+function cambiarColor() {
+    const body = document.body;
+    body.classList.toggle("modo-oscuro");
+    modoOscuro = !modoOscuro;
+    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+}
+
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
+let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+
+function cambiarTexto() {
+    indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
+    const tamano = tamanosTexto[indiceTamano];
+
+    const elementosAfectados = document.querySelectorAll(
+        "#nombre-usuario, #rol-usuario, h1, h2, h3, h4, label, .tab-button, .examen-card h4, .examen-card p, .opciones-menu button"
+    );
+
+    elementosAfectados.forEach(elem => {
+        elem.style.fontSize = tamano;
+    });
+}
+
+
+// Se ejecuta cuando el DOM está completamente cargado
+document.addEventListener("DOMContentLoaded", () => {
+    // Rellenar información de usuario
+    if (nombreUsuario) {
+        document.getElementById('nombre-usuario').textContent = nombreUsuario;
+        document.getElementById('profile-pic').src = `img/${idUsuario}.png`;
+    }
+
+    if (rolUsuario) {
+        document.getElementById('rol-usuario').textContent = rolUsuario.charAt(0).toUpperCase() + rolUsuario.slice(1);
+    }
+
+    // Cargar preferencia de modo oscuro
+    if (localStorage.getItem('modoOscuro') === 'true') {
+        document.body.classList.add('modo-oscuro');
+        modoOscuro = true;
+    }
+
+    // Aplicar tamaño de texto al cargar la página
+    aplicarTamanoTexto();
+
+    // Verificación de rol para la página del profesor
+    if (window.location.pathname.includes('profesor.html')) {
+        if (rolUsuario !== 'profesor') {
+            alert("Acceso denegado. Esta página es solo para profesores.");
+            window.location.href = 'index.html';
+        }
     }
 });

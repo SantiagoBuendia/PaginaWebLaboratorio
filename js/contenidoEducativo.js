@@ -1,4 +1,4 @@
-// ======= AUTENTICACIÓN Y CARGA DE USUARIO =======
+ï»¿// ======= AUTENTICACIÃ“N Y CARGA DE USUARIO =======
 function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
@@ -59,8 +59,15 @@ window.addEventListener('click', function (event) {
 });
 
 function volverAlMenu() {
-    const origen = localStorage.getItem('origen') || 'menu.html';
-    window.location.href = origen;
+    if (rol === 'profesor') {
+        window.location.href = 'http://localhost/PaginaWebLaboratorio/profesor.html';
+    }
+    else if (rol === 'estudiante') {
+        window.location.href = 'http://localhost/PaginaWebLaboratorio/estudiante.html';
+    }
+    else {
+        window.location.href = 'index.html';
+    }
 }
 
 let modoOscuro = false;
@@ -92,7 +99,7 @@ function cargarRecursos() {
         .then((html) => {
             document.getElementById("tabla-recursos").innerHTML = html;
 
-            // ?? REGISTRAR EVENTOS DESPUÉS DE CARGAR LA TABLA
+            // ?? REGISTRAR EVENTOS DESPUÃ‰S DE CARGAR LA TABLA
             const busquedaInput = document.getElementById("busqueda");
             const categoriaSelect = document.getElementById("filtro-categoria");
 
@@ -108,7 +115,7 @@ function cargarRecursos() {
 
 cargarRecursos();
 
-// ======= FUNCIÓN PARA FILTRAR =======
+// ======= FUNCIÃ“N PARA FILTRAR =======
 function aplicarFiltros() {
     const filtroTexto = document.getElementById("busqueda").value.toLowerCase();
     const filtroCategoria = document.getElementById("filtro-categoria").value.toLowerCase();

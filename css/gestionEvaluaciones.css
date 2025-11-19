@@ -650,3 +650,94 @@ body.modo-oscuro {
         background-color: #c82333;
         transform: translateY(-1px);
     }
+
+/* ============================================================
+   ESTILOS PARA TABLA Y BOTONES DE ACCIÓN
+   ============================================================ */
+
+/* Estilo para la Tabla (Para quitar el border=1 feo) */
+.tabla-moderna {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Para recortar esquinas */
+    margin-top: 20px;
+}
+
+    .tabla-moderna thead {
+        background-color: #003366; /* Azul corporativo */
+        color: white;
+    }
+
+    .tabla-moderna th, .tabla-moderna td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tabla-moderna tbody tr:hover {
+        background-color: #f1f5f9; /* Efecto hover en la fila */
+    }
+
+/* Estilos para los Botones de Acción */
+.btn-accion {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: white;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; /* Espacio entre icono y texto */
+    margin-right: 5px;
+    margin-bottom: 3px; /* Por si se envuelven en pantallas pequeñas */
+}
+
+    .btn-accion:hover {
+        transform: translateY(-2px); /* Se levanta un poco */
+        opacity: 0.9;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+/* Colores específicos por función */
+.btn-editar {
+    background-color: #ffc107; /* Amarillo */
+    color: #333; /* Texto oscuro para contraste */
+}
+
+.btn-agregar {
+    background-color: #28a745; /* Verde */
+}
+
+.btn-ver {
+    background-color: #17a2b8; /* Cian/Azul claro */
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo */
+}
+
+/* Enlace contenedor (para quitar subrayado del <a>) */
+a.link-no-style {
+    text-decoration: none;
+}
+
+/* MODO OSCURO (Soporte) */
+body.modo-oscuro .tabla-moderna {
+    background-color: #1e1e1e;
+    color: #e2e6ea;
+}
+
+    body.modo-oscuro .tabla-moderna thead {
+        background-color: #002244;
+    }
+
+    body.modo-oscuro .tabla-moderna th,
+    body.modo-oscuro .tabla-moderna td {
+        border-bottom-color: #444;
+    }

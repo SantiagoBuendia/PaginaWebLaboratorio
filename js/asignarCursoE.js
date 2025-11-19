@@ -54,11 +54,35 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    fetch('/cgi-bin/PaginaWebLaboratorio.exe?accion=listarGrupos')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('grupo_id');
-            select.innerHTML = ""; 
+    const select = document.getElementById('grupo_id');
+    if (!select) {
+        console.error("No existe el elemento select#grupo_id en el DOM.");
+        return;
+    }
+
+    const url = '/cgi-bin/PaginaWebLaboratorio.exe?accion=listarGrupos';
+    console.log("Fetch grupos ->", url);
+
+    fetch(url)
+        .then(response => {
+            console.log("Respuesta fetch grupos:", response.status, response.statusText, response.headers.get('content-type'));
+            // Leemos como texto para depurar cualquier HTML/errores que devuelva el CGI
+            return response.text().then(text => ({ ok: response.ok, status: response.status, text }));
+        })
+        .then(({ ok, status, text }) => {
+            console.log("Respuesta cruda de listarGrupos:", text);
+            if (!ok) {
+                throw new Error(`Petición fallida. status=${status}`);
+            }
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (err) {
+                throw new Error("JSON inválido: " + err.message);
+            }
+
+            // Poblamos el select
+            select.innerHTML = "";
             if (Array.isArray(data) && data.length > 0) {
                 data.forEach(grupo => {
                     const option = document.createElement('option');
@@ -71,6 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         })
         .catch(error => {
-            document.getElementById('grupo_id').innerHTML = "<option value=''>Error al cargar grupos</option>";
+            console.error("Error al cargar grupos:", error);
+            select.innerHTML = "<option value=''>Error al cargar grupos</option>";
         });
 });

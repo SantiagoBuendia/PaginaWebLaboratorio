@@ -112,7 +112,7 @@ function showTab(tabId) {
 
     // Si se activa la pestaña "Mis Exámenes", cargar la lista
     if (tabId === 'mis-examenes') {
-        cargarListaExamenes();
+        cargarTablaExamenes();
     }
 }
 
@@ -288,6 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     formPregunta.reset();
                     document.getElementById("examen_id").value = examenIdActual; // Asegura que examen_id se mantenga
                     preguntasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById("finalizar-container").classList.remove("hidden");
                 } else {
                     alert("Error al guardar opciones: " + (data.error || "Mensaje desconocido"));
                 }
@@ -318,100 +319,78 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ======= CARGAR Y MOSTRAR EXÁMENES DEL PROFESOR =======
-async function cargarListaExamenes() {
-    const listaExamenesDiv = document.getElementById('lista-examenes');
-    listaExamenesDiv.innerHTML = '<p class="loading-message"><i class="fas fa-spinner fa-spin"></i> Cargando exámenes...</p>';
+// Cargar tabla HTML de exámenes y mostrarla
+async function cargarTablaExamenes() {
+    const contenedor = document.getElementById('tabla-examenes');
+    contenedor.innerHTML = '<p>Cargando exámenes...</p>';
 
     if (!idProfesor) {
-        listaExamenesDiv.innerHTML = "<p class='error-message'>Error: ID de profesor no disponible para cargar exámenes.</p>";
+        contenedor.innerHTML = '<p>Error: ID de profesor no disponible.</p>';
         return;
     }
 
-    const urlListarExamenes = `/cgi-bin/PaginaWebLaboratorio.exe?accion=listarExamenesProfesor&profesor_id=${idProfesor}`;
+    const url = `/cgi-bin/PaginaWebLaboratorio.exe?accion=listarExamenesPorProfesor&&idProfesor=${idProfesor}`;
 
+    console.log("URL de profesor de grupos:", url);
     try {
-        const response = await fetch(urlListarExamenes);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Exámenes del profesor:", data);
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const html = await resp.text();
+        contenedor.innerHTML = html;
 
-        if (Array.isArray(data) && data.length > 0) {
-            listaExamenesDiv.innerHTML = ''; // Limpiar el mensaje de carga
-            data.forEach(examen => {
-                const examenCard = document.createElement('div');
-                examenCard.classList.add('examen-card');
-                examenCard.innerHTML = `
-                    <h4>${examen.titulo}</h4>
-                    <p><strong>Descripción:</strong> ${examen.descripcion || 'Sin descripción'}</p>
-                    <p><strong>Grupo:</strong> ${examen.nombre_grupo || 'N/A'}</p>
-                    <p><strong>Instrucciones:</strong> ${examen.instrucciones || 'Sin instrucciones'}</p>
-                    <div class="meta-info">
-                        <span><strong>Intentos:</strong> ${examen.intentos_permitidos}</span>
-                        <span><strong>Creado:</strong> ${new Date(examen.fecha_creacion).toLocaleDateString()}</span>
-                    </div>
-                    <div class="examen-actions">
-                        <button class="btn-view-questions" onclick="verPreguntasExamen(${examen.id})">
-                            <i class="fas fa-question-circle"></i> Ver Preguntas
-                        </button>
-                        <button class="btn-edit" onclick="editarExamen(${examen.id})">
-                            <i class="fas fa-edit"></i> Editar
-                        </button>
-                        <button class="btn-delete" onclick="eliminarExamen(${examen.id})">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </button>
-                    </div>
-                `;
-                listaExamenesDiv.appendChild(examenCard);
-            });
-        } else {
-            listaExamenesDiv.innerHTML = "<p class='info-message'>No has creado ningún examen todavía.</p>";
-        }
-    } catch (error) {
-        console.error("Error al cargar la lista de exámenes:", error);
-        listaExamenesDiv.innerHTML = "<p class='error-message'>Error al cargar los exámenes. Inténtalo de nuevo más tarde.</p>";
+    } catch (err) {
+        console.error('Error al cargar tabla de exámenes:', err);
+        contenedor.innerHTML = '<p>Error al cargar la lista de exámenes.</p>';
     }
 }
 
-// Funciones de acción para los botones
-function verPreguntasExamen(examenId) {
-    alert(`Funcionalidad para ver preguntas del examen ID: ${examenId} (no implementada aún).`);
-    // window.location.href = `verPreguntas.html?examen_id=${examenId}`;
-}
-
-function editarExamen(examenId) {
-    alert(`Funcionalidad para editar examen ID: ${examenId} (no implementada aún).`);
-    // Podrías cargar los datos del examen en el formulario de creación o uno nuevo
-}
-
-async function eliminarExamen(examenId) {
-    if (!confirm(`¿Estás seguro de que quieres eliminar el examen con ID: ${examenId}? Esta acción es irreversible.`)) {
-        return;
-    }
+// Función que llama al backend para eliminar (usada por los enlaces de la tabla)
+async function confirmarEliminarExamen(examenId) {
+    if (!confirm('¿Eliminar este examen? Esta acción no se puede deshacer.')) return false;
 
     try {
-        const response = await fetch(`/cgi-bin/PaginaWebLaboratorio.exe`, {
+        const resp = await fetch('/cgi-bin/PaginaWebLaboratorio.exe', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `accion=eliminarExamen&examen_id=${examenId}`
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `accion=eliminarExamen&examen_id=${encodeURIComponent(examenId)}`
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
         if (data.success) {
-            alert("Examen eliminado correctamente.");
-            cargarListaExamenes(); // Recargar la lista de exámenes
+            alert('Examen eliminado correctamente.');
+            cargarTablaExamenesHTML();
+            return true;
         } else {
-            alert("Error al eliminar el examen: " + (data.error || "Mensaje desconocido"));
+            alert('Error al eliminar examen: ' + (data.error || 'Desconocido'));
+            return false;
         }
-    } catch (error) {
-        console.error("Error al eliminar el examen:", error);
-        alert("Hubo un problema de conexión al eliminar el examen. Por favor, inténtalo de nuevo.");
+    } catch (err) {
+        console.error('Error al eliminar examen:', err);
+        alert('Error de conexión al eliminar el examen.');
+        return false;
     }
+}
+
+// Conecta el botón para cargar la tabla
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('btn-ver-examenes');
+    if (btn) btn.addEventListener('click', () => {
+        // Alternar visibilidad del formulario y mostrar tabla si corresponde
+        document.getElementById('form-examen').style.display = 'none';
+        document.getElementById('tabla-examenes').style.display = '';
+        cargarTablaExamenesHTML();
+    });
+});
+function finalizarExamen() {
+    const confirmar = confirm("¿Deseas finalizar el examen?");
+    if (!confirmar) return;
+
+    // Ocultar secciones de creación
+    document.getElementById("preguntas-container").classList.add("hidden");
+    document.getElementById("finalizar-container").classList.add("hidden");
+
+    // Mostrar mensaje final
+    document.getElementById("mensaje-final").classList.remove("hidden");
+
+    alert("Examen finalizado correctamente. Puedes revisarlo en 'Mis Exámenes'.");
 }

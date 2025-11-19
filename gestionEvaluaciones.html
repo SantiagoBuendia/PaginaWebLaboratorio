@@ -113,16 +113,25 @@
                                 <i class="fas fa-save"></i> Guardar Opciones y Siguiente
                             </button>
                         </form>
+
+                        <div id="finalizar-container" class="btn-primary"">
+                            <button type="button" class="btn-success" onclick="finalizarExamen()">
+                                <i class="fas fa-check-circle"></i> Finalizar Examen
+                            </button>
+                        </div>
+
+                        <div id="mensaje-final" class="hidden" style="text-align:center; margin-top:20px;">
+                            <h3> Examen finalizado correctamente</h3>
+                            <p>Puedes revisarlo en la sección <strong>Mis Exámenes</strong>.</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="mis-examenes" class="tab-content">
-            <h2>Mis Exámenes Creados</h2>
-            <div id="lista-examenes" class="examenes-grid">
-                <!-- Los exámenes se cargarán aquí -->
-            </div>
+        <div id="mis-examenes" class="tab-content active">
+            <div id="tabla-examenes"></div>
         </div>
     </div>
     <script src="js/gestionEvaluaciones.js"></script>

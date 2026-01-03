@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Estudiante - Detalle</title>
+    <link rel="stylesheet" href="css/verExamen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="usuario"><strong id="nombre-usuario">Panel de Profesor</strong></div>
+        <button id="btn-volver" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Volver</button>
+    </div>
+
+    <div class="contenedor-principal" style="flex-direction: column; gap: 20px; padding: 20px;">
+
+        <div class="card-view" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <h2 id="nombre-alumno-titulo" style="margin:0;">Cargando historial...</h2>
+
+            <div class="acciones-reporte">
+                <button onclick="generarInformePDF()" class="btn-reporte pdf" style="background:#e74c3c; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-right:10px;">
+                    <i class="fas fa-file-pdf"></i> Exportar PDF
+                </button>
+                <button onclick="generarInformeExcel()" class="btn-reporte excel" style="background:#27ae60; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">
+                    <i class="fas fa-file-excel"></i> Exportar Excel
+                </button>
+            </div>
+        </div>
+
+        <div id="notificacion-exito" style="display:none; background:#d4edda; color:#155724; padding:15px; border-radius:5px; border:1px solid #c3e6cb; margin-bottom:10px;">
+            <i class="fas fa-check-circle"></i> <span>Informe generado con éxito</span>
+        </div>
+
+        <div class="card-view">
+            <h3><i class="fas fa-chart-line"></i> Evolución de Calificaciones</h3>
+            <canvas id="graficaEvolucion" style="max-height: 250px;"></canvas>
+        </div>
+
+        <div class="lista-usuarios card-view">
+            <h3><i class="fas fa-history"></i> Intentos Realizados</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background:#f1f5f9; text-align: left;">
+                        <th style="padding:12px;">Examen</th>
+                        <th>N° Intento</th>
+                        <th>Nota</th>
+                        <th>Aciertos (%)</th>
+                        <th class="no-export">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="historial-intentos">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/reporteDesempeño.js"></script>
+</body>
+</html>

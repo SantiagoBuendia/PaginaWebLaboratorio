@@ -1,5 +1,4 @@
-﻿// --- LÓGICA DE CARGA DEL EXAMEN ---
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const idExamen = params.get('id');
     const contenedor = document.getElementById('contenedor-preguntas');
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // URL al ejecutable C++ (AJUSTA LA RUTA SI ES NECESARIO)
     const urlCGI = `/cgi-bin/PaginaWebLaboratorio.exe?accion=mostrarExamen&examen_id=${idExamen}`;
 
     fetch(urlCGI)
@@ -18,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.text();
         })
         .then(html => {
-            // Limpiamos la cabecera Content-type si C++ la envía
             const htmlLimpio = html.replace(/Content-type: text\/html\s+/i, "").trim();
             contenedor.innerHTML = htmlLimpio;
         })
@@ -27,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
             contenedor.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar las preguntas.</p>";
         });
 });
-
 
 function getToken() {
     const cookies = document.cookie.split('; ');
@@ -45,7 +41,6 @@ if (!token) {
     alert("No hay token. Redirigiendo...");
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
-
 
 function getCookie(nombre) {
     const cookies = document.cookie.split('; ');
@@ -66,11 +61,9 @@ if (nombre) {
     document.getElementById('profile-pic').src = rutaImagen;
 }
 
-
 if (rol) {
     document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
 }
-
 
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -80,7 +73,6 @@ function cerrarSesion() {
 
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
-
 
 function toggleMenu() {
     const menu = document.getElementById("opciones-menu");
@@ -92,18 +84,16 @@ function cambiarColor() {
     const body = document.body;
     body.classList.toggle("modo-oscuro");
     modoOscuro = !modoOscuro;
-    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+    localStorage.setItem('modoOscuro', modoOscuro);
 }
 
-// Cargar preferencia de modo oscuro al iniciar
 if (localStorage.getItem('modoOscuro') === 'true') {
     document.body.classList.add('modo-oscuro');
     modoOscuro = true;
 }
 
-
-const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
-let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"];
+let indiceTamano = 0;
 
 function cambiarTexto() {
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
@@ -118,7 +108,6 @@ function cambiarTexto() {
     });
 }
 
-// Cierra el menú si se hace clic fuera
 window.addEventListener('click', function (event) {
     const menu = document.getElementById("opciones-menu");
     const boton = document.querySelector(".boton-menu");

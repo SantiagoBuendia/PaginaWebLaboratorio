@@ -19,7 +19,6 @@ if (!token) {
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
 
-
 function getCookie(nombre) {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
@@ -29,9 +28,7 @@ function getCookie(nombre) {
     return null;
 }
 
-
 const id = getCookie('id');
-
 
 if (id) {
     document.getElementById('usuario_id').value = id;
@@ -77,4 +74,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const campo = document.getElementById("contrasenan");
         campo.type = this.checked ? "text" : "password";
     });
+});
+
+document.querySelector("form").addEventListener("submit", e => {
+    const file = document.getElementById("foto").files[0];
+    console.log("Archivo al enviar:", file);
 });

@@ -1,5 +1,4 @@
-﻿/* Reset básico */
-body {
+﻿body {
     width: 100%;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +18,6 @@ body {
     }
 }
 
-/* HEADER */
 .header {
     background-color: #003366;
     color: white;
@@ -34,6 +32,7 @@ body {
     display: flex;
     align-items: center;
 }
+
 .avatar {
     width: 50px;
     height: 50px;
@@ -57,12 +56,11 @@ body {
         color: #e0e0e0;
     }
 
-/* BOTÓN VOLVER */
 #btn-volver {
     margin: 20px 25px;
     padding: 10px 20px;
     font-size: 15px;
-    background-color: #6c757d; /* Gris más suave */
+    background-color: #6c757d;
     color: white;
     border: none;
     border-radius: 6px;
@@ -82,7 +80,6 @@ body {
         font-size: 1em;
     }
 
-/* MENÚ DESPLEGABLE */
 .menu-desplegable-container {
     position: relative;
     display: inline-block;
@@ -90,7 +87,7 @@ body {
 
 .boton-menu {
     font-size: 22px;
-    background-color: transparent; /* Transparente para integrar con el header */
+    background-color: transparent;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -106,7 +103,7 @@ body {
 .opciones-menu {
     position: absolute;
     right: 0;
-    top: 55px; /* Ajustado para que baje un poco más */
+    top: 55px;
     background-color: white;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -115,7 +112,7 @@ body {
     flex-direction: column;
     min-width: 180px;
     z-index: 1000;
-    overflow: hidden; /* Para que los bordes redondeados se apliquen bien */
+    overflow: hidden;
 }
 
     .opciones-menu button {
@@ -139,7 +136,6 @@ body {
     display: none;
 }
 
-/* MODO OSCURO */
 body.modo-oscuro {
     background-color: #212529;
     color: #e2e6ea;
@@ -282,7 +278,6 @@ body.modo-oscuro {
         color: #ced4da;
     }
 
-/* Contenedor principal para centrar el contenido y aplicar margen */
 .main-container {
     max-width: 900px;
     margin: 20px auto;
@@ -305,8 +300,6 @@ body.modo-oscuro {
     }
 }
 
-
-/* Pestañas de navegación */
 .tabs {
     display: flex;
     justify-content: center;
@@ -342,10 +335,9 @@ body.modo-oscuro {
             font-weight: bold;
             transform: translateY(2px);
             box-shadow: 0 -2px 8px rgba(0, 123, 255, 0.2);
-            z-index: 1; /* Para superponer ligeramente el borde inferior */
+            z-index: 1;
         }
 
-/* Contenido de las pestañas */
 .tab-content {
     display: none;
     padding-top: 20px;
@@ -356,7 +348,6 @@ body.modo-oscuro {
         animation: fadeIn 0.5s ease-out;
     }
 
-/* Tarjeta de formulario general */
 .form-card {
     background: #ffffff;
     padding: 25px 35px;
@@ -378,7 +369,6 @@ body.modo-oscuro {
         margin-bottom: 15px;
     }
 
-/* Grupos de formulario */
 .form-group {
     margin-bottom: 18px;
 }
@@ -402,7 +392,7 @@ body.modo-oscuro {
         font-size: 1em;
         outline: none;
         transition: all 0.3s ease;
-        box-sizing: border-box; /* Incluir padding y borde en el ancho */
+        box-sizing: border-box;
     }
 
         .form-group input:focus,
@@ -417,8 +407,6 @@ body.modo-oscuro {
         resize: vertical;
     }
 
-
-/* Botones de acción general */
 .btn-primary, .btn-secondary, .btn-tertiary {
     display: flex;
     align-items: center;
@@ -432,7 +420,7 @@ body.modo-oscuro {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     margin-top: 20px;
-    width: fit-content; /* Se ajusta al contenido */
+    width: fit-content;
     margin-left: auto;
     margin-right: auto;
 }
@@ -462,7 +450,7 @@ body.modo-oscuro {
 .btn-tertiary {
     background-color: #17a2b8;
     color: white;
-    margin-bottom: 15px; /* Espacio debajo del botón de añadir opción */
+    margin-bottom: 15px;
 }
 
     .btn-tertiary:hover {
@@ -471,8 +459,6 @@ body.modo-oscuro {
         box-shadow: 0 4px 10px rgba(23, 162, 184, 0.3);
     }
 
-
-/* Secciones de preguntas y opciones */
 .form-section {
     margin-top: 30px;
     padding-top: 25px;
@@ -484,7 +470,6 @@ body.modo-oscuro {
         display: none;
     }
 
-/* Opciones de respuesta */
 #opciones-lista {
     margin-top: 15px;
 }
@@ -502,7 +487,7 @@ body.modo-oscuro {
 
     .opcion-item input[type="text"] {
         flex-grow: 1;
-        margin-bottom: 0; /* Anular el margen inferior predefinido */
+        margin-bottom: 0;
     }
 
     .opcion-item label {
@@ -515,7 +500,7 @@ body.modo-oscuro {
 
         .opcion-item label input[type="checkbox"] {
             margin-right: 5px;
-            width: auto; /* Dejar que el checkbox tenga su tamaño natural */
+            width: auto;
         }
 
     .opcion-item .btn-remove-option {
@@ -530,7 +515,7 @@ body.modo-oscuro {
         justify-content: center;
         cursor: pointer;
         transition: background-color 0.2s ease;
-        flex-shrink: 0; /* Evitar que se encoja */
+        flex-shrink: 0;
     }
 
         .opcion-item .btn-remove-option:hover {
@@ -538,7 +523,6 @@ body.modo-oscuro {
             transform: scale(1.05);
         }
 
-/* SECCIÓN "MIS EXÁMENES" */
 #mis-examenes h2 {
     text-align: center;
     color: #003366;
@@ -547,7 +531,7 @@ body.modo-oscuro {
 
 .examenes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
 }
 
@@ -560,7 +544,7 @@ body.modo-oscuro {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empujar acciones al final */
+    justify-content: space-between;
 }
 
     .examen-card:hover {
@@ -599,9 +583,9 @@ body.modo-oscuro {
 .examen-actions {
     margin-top: 20px;
     display: flex;
-    flex-wrap: wrap; /* Permitir que los botones se envuelvan */
-    gap: 10px; /* Espacio entre los botones */
-    justify-content: flex-end; /* Alinear a la derecha */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
     .examen-actions button {
@@ -620,7 +604,6 @@ body.modo-oscuro {
             font-size: 0.9em;
         }
 
-
 .btn-view-questions {
     background-color: #6c757d;
     color: white;
@@ -632,8 +615,8 @@ body.modo-oscuro {
     }
 
 .btn-edit {
-    background-color: #ffc107; /* Amarillo */
-    color: #343a40; /* Texto oscuro para contraste */
+    background-color: #ffc107;
+    color: #343a40;
 }
 
     .btn-edit:hover {
@@ -642,7 +625,7 @@ body.modo-oscuro {
     }
 
 .btn-delete {
-    background-color: #dc3545; /* Rojo */
+    background-color: #dc3545; 
     color: white;
 }
 
@@ -651,23 +634,18 @@ body.modo-oscuro {
         transform: translateY(-1px);
     }
 
-/* ============================================================
-   ESTILOS PARA TABLA Y BOTONES DE ACCIÓN
-   ============================================================ */
-
-/* Estilo para la Tabla (Para quitar el border=1 feo) */
 .tabla-moderna {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
-    overflow: hidden; /* Para recortar esquinas */
+    overflow: hidden;
     margin-top: 20px;
 }
 
     .tabla-moderna thead {
-        background-color: #003366; /* Azul corporativo */
+        background-color: #003366;
         color: white;
     }
 
@@ -678,10 +656,9 @@ body.modo-oscuro {
     }
 
     .tabla-moderna tbody tr:hover {
-        background-color: #f1f5f9; /* Efecto hover en la fila */
+        background-color: #f1f5f9;
     }
 
-/* Estilos para los Botones de Acción */
 .btn-accion {
     border: none;
     padding: 6px 12px;
@@ -693,41 +670,38 @@ body.modo-oscuro {
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
     display: inline-flex;
     align-items: center;
-    gap: 6px; /* Espacio entre icono y texto */
+    gap: 6px;
     margin-right: 5px;
-    margin-bottom: 3px; /* Por si se envuelven en pantallas pequeñas */
+    margin-bottom: 3px;
 }
 
     .btn-accion:hover {
-        transform: translateY(-2px); /* Se levanta un poco */
+        transform: translateY(-2px);
         opacity: 0.9;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-/* Colores específicos por función */
 .btn-editar {
-    background-color: #ffc107; /* Amarillo */
-    color: #333; /* Texto oscuro para contraste */
+    background-color: #ffc107;
+    color: #333;
 }
 
 .btn-agregar {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745;
 }
 
 .btn-ver {
-    background-color: #17a2b8; /* Cian/Azul claro */
+    background-color: #17a2b8;
 }
 
 .btn-eliminar {
-    background-color: #dc3545; /* Rojo */
+    background-color: #dc3545;
 }
 
-/* Enlace contenedor (para quitar subrayado del <a>) */
 a.link-no-style {
     text-decoration: none;
 }
 
-/* MODO OSCURO (Soporte) */
 body.modo-oscuro .tabla-moderna {
     background-color: #1e1e1e;
     color: #e2e6ea;

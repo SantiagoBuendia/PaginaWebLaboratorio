@@ -1,5 +1,4 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    // 1. Obtener ID
     const params = new URLSearchParams(window.location.search);
     const idExamen = params.get('id_examen');
 
@@ -10,24 +9,21 @@
     }
     document.getElementById('examen_id').value = idExamen;
 
-    // 2. Inicializar opciones
     agregarCampoOpcion();
     agregarCampoOpcion();
 
-    // 3. Listener Submit
     document.getElementById('form-nueva-pregunta').addEventListener('submit', function (e) {
         e.preventDefault();
         guardarPreguntaCompleta();
     });
 });
 
-// --- AQUÍ USAMOS LAS NUEVAS CLASES DEL CSS INDEPENDIENTE ---
 function agregarCampoOpcion() {
     const container = document.getElementById('contenedor-opciones');
     const index = container.children.length + 1;
 
     const div = document.createElement('div');
-    div.className = 'opcion-row'; // Clase definida en agregarPregunta.css
+    div.className = 'opcion-row';
 
     div.innerHTML = `
         <input type="radio" name="radio_correcta" class="radio-custom" title="Marcar como correcta" required>
@@ -48,14 +44,12 @@ function eliminarOpcion(btn) {
     }
 }
 
-// --- Lógica de guardado (Se mantiene igual) ---
 async function guardarPreguntaCompleta() {
     const idExamen = document.getElementById('examen_id').value;
     const pregunta = document.getElementById('pregunta').value;
     const puntos = document.getElementById('puntos').value;
     const explicacion = document.getElementById('explicacion').value;
 
-    // Validación de radio button
     const radios = document.querySelectorAll('input[name="radio_correcta"]');
     let seleccionada = false;
     radios.forEach(r => { if (r.checked) seleccionada = true; });
@@ -73,7 +67,6 @@ async function guardarPreguntaCompleta() {
     dataPregunta.append('explicacion', explicacion);
 
     try {
-        // Paso 1
         const responsePregunta = await fetch('/cgi-bin/PaginaWebLaboratorio.exe', {
             method: 'POST', body: dataPregunta
         });
@@ -91,7 +84,6 @@ async function guardarPreguntaCompleta() {
         document.getElementById('contenedor-opciones').innerHTML = "";
         agregarCampoOpcion();
         agregarCampoOpcion();
-
     } catch (error) {
         console.error(error);
         alert("Error: " + error.message);

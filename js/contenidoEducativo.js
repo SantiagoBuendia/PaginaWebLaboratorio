@@ -1,5 +1,4 @@
-﻿// ======= AUTENTICACIÓN Y CARGA DE USUARIO =======
-function getToken() {
+﻿function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
         const [key, value] = c.split('=');
@@ -36,7 +35,6 @@ if (rol) {
     document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
 }
 
-// ======= FUNCIONES DE INTERFAZ =======
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -92,30 +90,61 @@ function cambiarTexto() {
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
 }
 
-// ======= CARGAR TABLA DE RECURSOS Y ASIGNAR FILTROS =======
 function cargarRecursos() {
     fetch("/cgi-bin/PaginaWebLaboratorio.exe?accion=listare")
         .then((res) => res.text())
         .then((html) => {
             document.getElementById("tabla-recursos").innerHTML = html;
 
-            // ?? REGISTRAR EVENTOS DESPUÉS DE CARGAR LA TABLA
+            gestionarPermisosPorRol();
+
             const busquedaInput = document.getElementById("busqueda");
             const categoriaSelect = document.getElementById("filtro-categoria");
 
-            busquedaInput.addEventListener("input", aplicarFiltros);
-            categoriaSelect.addEventListener("change", aplicarFiltros);
+            if (busquedaInput) busquedaInput.addEventListener("input", aplicarFiltros);
+            if (categoriaSelect) categoriaSelect.addEventListener("change", aplicarFiltros);
 
-            aplicarFiltros(); // Filtro inicial
+            aplicarFiltros();
         })
         .catch(() => {
             document.getElementById("tabla-recursos").innerText = "Error al cargar recursos.";
         });
 }
 
+function gestionarPermisosPorRol() {
+    const btnAgregar = document.querySelector("button[onclick*='nuevoRecurso.html']");
+    if (rol === 'estudiante' && btnAgregar) {
+        btnAgregar.style.display = 'none';
+    }
+
+    if (rol === 'estudiante') {
+        const tabla = document.getElementById("tabla-recursos-real");
+        if (!tabla) return;
+
+        const cabeceras = tabla.querySelectorAll("th");
+        let indiceAcciones = -1;
+
+        cabeceras.forEach((th, index) => {
+            if (th.textContent.trim().toLowerCase() === "acciones") {
+                indiceAcciones = index;
+                th.style.display = "none";
+            }
+        });
+
+        if (indiceAcciones !== -1) {
+            const filas = tabla.querySelectorAll("tr");
+            filas.forEach(fila => {
+                const celdas = fila.querySelectorAll("td");
+                if (celdas[indiceAcciones]) {
+                    celdas[indiceAcciones].style.display = "none";
+                }
+            });
+        }
+    }
+}
+
 cargarRecursos();
 
-// ======= FUNCIÓN PARA FILTRAR =======
 function aplicarFiltros() {
     const filtroTexto = document.getElementById("busqueda").value.toLowerCase();
     const filtroCategoria = document.getElementById("filtro-categoria").value.toLowerCase();

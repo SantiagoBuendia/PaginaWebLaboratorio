@@ -1,5 +1,4 @@
-﻿// ======= AUTENTICACIÓN Y CARGA DE USUARIO =======
-function getToken() {
+﻿function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
         const [key, value] = c.split('=');
@@ -36,7 +35,6 @@ if (rol) {
     document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
 }
 
-// ======= FUNCIONES DE INTERFAZ =======
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -90,20 +88,17 @@ document.getElementById("tipo").addEventListener("change", function () {
     const enlaceInput = document.getElementById("enlace");
 
     if (this.value === "") {
-        // Si no ha seleccionado nada, ocultar campo
         grupoEnlace.style.display = "none";
         enlaceInput.value = "";
         enlaceInput.removeAttribute("accept");
     }
     else if (this.value === "guias") {
-        // Mostrar campo como archivo
         grupoEnlace.style.display = "block";
         enlaceInput.type = "file";
         enlaceInput.removeAttribute("placeholder");
         enlaceInput.setAttribute("accept", ".pdf,.doc,.docx");
     }
     else {
-        // Mostrar campo como enlace
         grupoEnlace.style.display = "block";
         enlaceInput.type = "url";
         enlaceInput.setAttribute("placeholder", "Pegue el enlace aquí");

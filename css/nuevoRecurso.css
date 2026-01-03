@@ -1,5 +1,4 @@
-﻿/* Reset básico */
-body, html {
+﻿body, html {
     width: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,7 +6,6 @@ body, html {
     color: #333;
 }
 
-/* HEADER */
 .header {
     background-color: #003366;
     color: white;
@@ -35,7 +33,6 @@ body, html {
     line-height: 1.2;
 }
 
-/* BOTÓN VOLVER */
 #btn-volver {
     margin: 20px;
     padding: 12px 24px;
@@ -52,7 +49,6 @@ body, html {
         background-color: #0056b3;
     }
 
-/* MENÚ DESPLEGABLE */
 .menu-desplegable-container {
     position: relative;
     display: inline-block;
@@ -99,8 +95,6 @@ body, html {
     display: none;
 }
 
-
-/* MODO OSCURO */
 body.modo-oscuro {
     background-color: #121212;
     color: white;
@@ -119,18 +113,15 @@ body.modo-oscuro {
     border-color: #555;
 }
 
-
-/* Contenedor del formulario */
 .perfil-container {
     max-width: 450px;
     margin: 50px auto;
     background: #fff;
-    padding: 30px 50px; /* más espacio lateral */
+    padding: 30px 50px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* Animación suave */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -143,21 +134,18 @@ body.modo-oscuro {
     }
 }
 
-/* Título */
 .perfil-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #003366;
 }
 
-/* Etiquetas */
 .form-group label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-/* Campos de texto y select */
 .form-group input,
 .form-group select {
     width: 100%;
@@ -176,15 +164,14 @@ body.modo-oscuro {
         box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
     }
 
-/* Botones */
 .form-actions {
     display: flex;
-    justify-content: center; /* centrarlos si quieres */
+    justify-content: center;
     gap: 10px;
 }
 
     .form-actions button {
-        flex: none; /* no estirar */
+        flex: none;
         padding: 5px 15px;
         font-size: 15px;
         border: none;
@@ -193,29 +180,29 @@ body.modo-oscuro {
         transition: background-color 0.3s ease, transform 0.1s ease;
         width: auto;
     }
+
 .btn-guardar {
     padding: 5px 15px;
 }
 
+.form-actions button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
 
-        .form-actions button[type="submit"] {
-            background-color: #28a745;
-            color: white;
-        }
+.form-actions button[type="button"] {
+    background-color: #007BFF;
+    color: white;
+}
 
-        .form-actions button[type="button"] {
-            background-color: #007BFF;
-            color: white;
-        }
+.form-actions button:hover {
+    transform: translateY(-1px);
+}
 
-        .form-actions button:hover {
-            transform: translateY(-1px);
-        }
+.form-actions button[type="submit"]:hover {
+    background-color: #218838;
+}
 
-        .form-actions button[type="submit"]:hover {
-            background-color: #218838;
-        }
-
-        .form-actions button[type="button"]:hover {
-            background-color: #0056b3;
-        }
+.form-actions button[type="button"]:hover {
+    background-color: #0056b3;
+}

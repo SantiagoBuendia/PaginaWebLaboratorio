@@ -1,5 +1,4 @@
-﻿// ======= AUTENTICACIÓN Y CARGA DE USUARIO =======
-function getToken() {
+﻿function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
         const [key, value] = c.split('=', 2);
@@ -25,12 +24,12 @@ function getCookie(nombre) {
 
 const nombreUsuario = getCookie('usuario');
 const rolUsuario = getCookie('rol');
-const idProfesor = getCookie('id'); // Este es el ID del profesor
+const idProfesor = getCookie('id');
 console.log("ID del profesor autenticado:", idProfesor);
 
 if (nombreUsuario) {
     document.getElementById('nombre-usuario').textContent = nombreUsuario;
-    // La imagen de perfil no se modifica para mantener el tamaño
+
     document.getElementById('profile-pic').src = `img/${idProfesor}.png`;
 }
 
@@ -38,7 +37,6 @@ if (rolUsuario) {
     document.getElementById('rol-usuario').textContent = rolUsuario.charAt(0).toUpperCase() + rolUsuario.slice(1);
 }
 
-// ======= FUNCIONES DE INTERFAZ GENERAL =======
 function cerrarSesion() {
     document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -69,18 +67,16 @@ function cambiarColor() {
     const body = document.body;
     body.classList.toggle("modo-oscuro");
     modoOscuro = !modoOscuro;
-    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+    localStorage.setItem('modoOscuro', modoOscuro);
 }
 
-// Cargar preferencia de modo oscuro al iniciar
 if (localStorage.getItem('modoOscuro') === 'true') {
     document.body.classList.add('modo-oscuro');
     modoOscuro = true;
 }
 
-
-const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
-let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"];
+let indiceTamano = 0;
 
 function cambiarTexto() {
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
@@ -95,28 +91,23 @@ function cambiarTexto() {
     });
 }
 
-// ======= NAVEGACIÓN POR PESTAÑAS =======
 function showTab(tabId) {
-    // Oculta todos los contenidos de las pestañas
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
-    // Desactiva todos los botones de las pestañas
+
     document.querySelectorAll('.tab-button').forEach(button => {
         button.classList.remove('active');
     });
 
-    // Muestra el contenido de la pestaña activa y activa su botón
     document.getElementById(tabId).classList.add('active');
     document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
 
-    // Si se activa la pestaña "Mis Exámenes", cargar la lista
     if (tabId === 'mis-examenes') {
         cargarTablaExamenes();
     }
 }
 
-// ======= CARGA INICIAL DE GRUPOS Y CONFIGURACIÓN =======
 document.addEventListener("DOMContentLoaded", () => {
     console.log("ID del profesor autenticado para grupos:", idProfesor);
     if (!idProfesor) {
@@ -155,15 +146,11 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('grupo_id').innerHTML = "<option value=''>Error al cargar grupos</option>";
         });
 
-    // Poner el id del profesor en el campo oculto
     document.getElementById('profesor_id').value = idProfesor;
 
-    // Inicialmente mostrar la pestaña de crear examen
     showTab('crear-examen');
 });
 
-
-// ======= FLUJO DE CREACIÓN DE EXAMEN, PREGUNTAS Y OPCIONES =======
 document.addEventListener("DOMContentLoaded", () => {
     const formExamen = document.getElementById("form-examen");
     const preguntasContainer = document.getElementById("preguntas-container");
@@ -175,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let examenIdActual = null;
     let preguntaIdActual = null;
 
-    // --- CREAR EXAMEN ---
     formExamen.addEventListener("submit", function (e) {
         e.preventDefault();
         const formData = new FormData(formExamen);
@@ -193,10 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data && data.examen_id) {
                     examenIdActual = data.examen_id;
                     document.getElementById("examen_id").value = examenIdActual;
-                    preguntasContainer.classList.remove("hidden"); // Mostrar sección de preguntas
+                    preguntasContainer.classList.remove("hidden");
                     alert("Examen creado con éxito. Ahora puedes agregar preguntas.");
-                    formExamen.reset(); // Limpiar formulario de examen
-                    // Opcional: Desplazarse a la sección de preguntas
+                    formExamen.reset();
+
                     preguntasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     alert("Error al crear el examen: " + (data.error || "Mensaje desconocido"));
@@ -208,11 +194,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // --- AGREGAR PREGUNTA ---
     formPregunta.addEventListener("submit", function (e) {
         e.preventDefault();
         const formData = new FormData(formPregunta);
-        formData.set('examen_id', examenIdActual); // Asegúrate de que examen_id esté en el formData
+        formData.set('examen_id', examenIdActual);
 
         fetch(formPregunta.action, {
             method: "POST",
@@ -228,12 +213,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data && data.pregunta_id) {
                     preguntaIdActual = data.pregunta_id;
                     document.getElementById("pregunta_id").value = preguntaIdActual;
-                    opcionesContainer.classList.remove("hidden"); // Mostrar sección de opciones
-                    opcionesLista.innerHTML = ""; // Limpiar opciones previas
-                    agregarOpcion(); // Agregar una opción por defecto
+                    opcionesContainer.classList.remove("hidden");
+                    opcionesLista.innerHTML = "";
+                    agregarOpcion();
                     alert("Pregunta agregada con éxito. Ahora agrega las opciones de respuesta.");
-                    formPregunta.reset(); // Limpiar formulario de pregunta
-                    document.getElementById("examen_id").value = examenIdActual; // Mantener examen_id
+                    formPregunta.reset();
+                    document.getElementById("examen_id").value = examenIdActual;
                     opcionesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     alert("Error al agregar la pregunta: " + (data.error || "Mensaje desconocido"));
@@ -245,7 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // --- AGREGAR OPCIONES DE RESPUESTA ---
     formOpciones.addEventListener("submit", function (e) {
         e.preventDefault();
         const formData = new FormData();
@@ -276,17 +260,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return response.json(); // Esperar JSON de respuesta
+                return response.json();
             })
             .then(data => {
                 if (data.success) {
                     alert("Opciones guardadas. Puedes continuar agregando más preguntas o finalizar el examen.");
                     formOpciones.reset();
                     opcionesLista.innerHTML = "";
-                    opcionesContainer.classList.add("hidden"); // Ocultar opciones para la siguiente pregunta
-                    // Limpiar el formulario de pregunta para la siguiente
+                    opcionesContainer.classList.add("hidden");
+
                     formPregunta.reset();
-                    document.getElementById("examen_id").value = examenIdActual; // Asegura que examen_id se mantenga
+                    document.getElementById("examen_id").value = examenIdActual;
                     preguntasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.getElementById("finalizar-container").classList.remove("hidden");
                 } else {
@@ -299,7 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // --- AGREGAR OPCIÓN DINÁMICA ---
     window.agregarOpcion = function () {
         const index = opcionesLista.children.length;
         const div = document.createElement('div');
@@ -318,8 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 });
 
-// ======= CARGAR Y MOSTRAR EXÁMENES DEL PROFESOR =======
-// Cargar tabla HTML de exámenes y mostrarla
 async function cargarTablaExamenes() {
     const contenedor = document.getElementById('tabla-examenes');
     contenedor.innerHTML = '<p>Cargando exámenes...</p>';
@@ -337,14 +318,12 @@ async function cargarTablaExamenes() {
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const html = await resp.text();
         contenedor.innerHTML = html;
-
     } catch (err) {
         console.error('Error al cargar tabla de exámenes:', err);
         contenedor.innerHTML = '<p>Error al cargar la lista de exámenes.</p>';
     }
 }
 
-// Función que llama al backend para eliminar (usada por los enlaces de la tabla)
 async function confirmarEliminarExamen(examenId) {
     if (!confirm('¿Eliminar este examen? Esta acción no se puede deshacer.')) return false;
 
@@ -371,11 +350,9 @@ async function confirmarEliminarExamen(examenId) {
     }
 }
 
-// Conecta el botón para cargar la tabla
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('btn-ver-examenes');
     if (btn) btn.addEventListener('click', () => {
-        // Alternar visibilidad del formulario y mostrar tabla si corresponde
         document.getElementById('form-examen').style.display = 'none';
         document.getElementById('tabla-examenes').style.display = '';
         cargarTablaExamenesHTML();
@@ -385,11 +362,9 @@ function finalizarExamen() {
     const confirmar = confirm("¿Deseas finalizar el examen?");
     if (!confirmar) return;
 
-    // Ocultar secciones de creación
     document.getElementById("preguntas-container").classList.add("hidden");
     document.getElementById("finalizar-container").classList.add("hidden");
 
-    // Mostrar mensaje final
     document.getElementById("mensaje-final").classList.remove("hidden");
 
     alert("Examen finalizado correctamente. Puedes revisarlo en 'Mis Exámenes'.");

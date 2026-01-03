@@ -14,19 +14,18 @@
     text-decoration: none;
     width: fit-content;
 }
-/* Tarjeta Principal (Hereda estilo pero refuerza propiedades) */
+
 .card-pregunta-container {
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     padding: 30px;
     margin-top: 20px;
-    border-top: 5px solid #28a745; /* Verde éxito */
+    border-top: 5px solid #28a745;
     width: 100%;
     max-width: 800px;
 }
 
-/* Título de la tarjeta */
 .titulo-seccion {
     color: #28a745;
     margin-top: 0;
@@ -36,7 +35,6 @@
     font-size: 1.8em;
 }
 
-/* Inputs y Textareas */
 .input-moderno {
     width: 100%;
     padding: 12px;
@@ -50,12 +48,11 @@
 }
 
     .input-moderno:focus {
-        border-color: #28a745; /* Foco verde */
+        border-color: #28a745;
         outline: none;
         box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
     }
 
-/* Etiquetas */
 .label-moderno {
     display: block;
     font-weight: 600;
@@ -64,7 +61,6 @@
     margin-top: 15px;
 }
 
-/* SECCIÓN DE OPCIONES */
 .contenedor-opciones {
     margin-top: 15px;
 }
@@ -87,7 +83,6 @@
         transform: translateX(5px);
     }
 
-/* Radio Button Personalizado */
 .radio-custom {
     transform: scale(1.5);
     cursor: pointer;
@@ -95,9 +90,6 @@
     margin-left: 5px;
 }
 
-/* BOTONES */
-
-/* Botón eliminar (Basurero) */
 .btn-eliminar-opcion {
     background: white;
     border: 1px solid #dc3545;
@@ -119,7 +111,6 @@
         transform: rotate(90deg);
     }
 
-/* Botón agregar opción (Azul claro) */
 .btn-agregar-opcion {
     background-color: #17a2b8;
     color: white;
@@ -139,7 +130,6 @@
         background-color: #138496;
     }
 
-/* Botón Guardar Principal (Azul Oscuro) */
 .btn-guardar-final {
     background-color: #003366;
     color: white;
@@ -159,7 +149,6 @@
         box-shadow: 0 6px 14px rgba(0,51,102,0.4);
     }
 
-/* --- SOPORTE MODO OSCURO --- */
 body.modo-oscuro .card-pregunta-container {
     background-color: #1e1e1e;
     border-top-color: #28a745;

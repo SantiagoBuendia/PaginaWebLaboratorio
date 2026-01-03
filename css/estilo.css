@@ -1,70 +1,4 @@
-﻿/*
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #dfe9f3, #ffffff);
-    background-image: url('https://www.transparenttextures.com/patterns/laboratory.png');
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login-container {
-    background-color: #ffffffdd;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    padding: 30px 40px;
-    width: 350px;
-    text-align: center;
-}
-
-h2 {
-    color: #2266aa;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    text-align: left;
-    margin: 10px 0 5px;
-    font-weight: 600;
-    color: #333;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    margin-top: 15px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
-}
-
-    input[type="submit"]:hover {
-        background-color: #2980b9;
-    }
-
-.lab-icon {
-    font-size: 48px;
-    color: #2980b9;
-    margin-bottom: 15px;
-}
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 :root {
     --white-color: hsl(0, 0%, 100%);
@@ -96,7 +30,7 @@ input, button {
     outline: none;
 }
 
-a{
+a {
     text-decoration: none
 }
 
@@ -110,7 +44,7 @@ img {
     height: 100vh;
     display: grid;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
@@ -141,7 +75,7 @@ img {
     margin-bottom: 2rem;
 }
 
-.login__content, .login__box{
+.login__content, .login__box {
     display: grid;
 }
 
@@ -175,7 +109,6 @@ img {
     position: relative;
     width: 100%;
 }
-
 
 .login__eye {
     position: absolute;
@@ -212,13 +145,13 @@ img {
     height: 16px;
 }
 
-.login__forgot{
+.login__forgot {
     color: var(--white-color);
 }
 
-.login__forgot:hover {
-    text-decoration: underline;
-}
+    .login__forgot:hover {
+        text-decoration: underline;
+    }
 
 .login__button {
     width: 100%;
@@ -234,24 +167,21 @@ img {
     text-align: center;
 }
 
-.login__register a {
-    color: var(--white-color);
-    font-weight: var(--font-medium);
-}
+    .login__register a {
+        color: var(--white-color);
+        font-weight: var(--font-medium);
+    }
 
-.login__register a:hover {
-    text-decoration: underline;
-}
+        .login__register a:hover {
+            text-decoration: underline;
+        }
 
-/* Chrome, Edge, Safari */
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-    -webkit-text-fill-color: #fff !important; /* texto blanco */
+    -webkit-text-fill-color: #fff !important;
     background-color: transparent !important;
-    transition: background-color 5000s ease-in-out 0s; /* truco para mantener transparencia */
+    transition: background-color 5000s ease-in-out 0s;
 }
-
-
 
 @media screen and (max-width: 576px) {
     .login {

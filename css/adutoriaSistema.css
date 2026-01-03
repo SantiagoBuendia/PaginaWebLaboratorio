@@ -1,5 +1,4 @@
-﻿/* Reset básico */
-body {
+﻿body {
     width: 100%;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +18,6 @@ body {
     }
 }
 
-/* HEADER */
 .header {
     background-color: #003366;
     color: white;
@@ -58,7 +56,6 @@ body {
         color: #e0e0e0;
     }
 
-/* MENÚ DESPLEGABLE */
 .menu-desplegable-container {
     position: relative;
     display: inline-block;
@@ -66,7 +63,7 @@ body {
 
 .boton-menu {
     font-size: 22px;
-    background-color: transparent; /* Transparente para integrar con el header */
+    background-color: transparent;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -82,7 +79,7 @@ body {
 .opciones-menu {
     position: absolute;
     right: 0;
-    top: 55px; /* Ajustado para que baje un poco más */
+    top: 55px;
     background-color: white;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -91,7 +88,7 @@ body {
     flex-direction: column;
     min-width: 180px;
     z-index: 1000;
-    overflow: hidden; /* Para que los bordes redondeados se apliquen bien */
+    overflow: hidden;
 }
 
     .opciones-menu button {
@@ -115,12 +112,11 @@ body {
     display: none;
 }
 
-/* BOTÓN VOLVER */
 #btn-volver {
     margin: 20px 25px;
     padding: 10px 20px;
     font-size: 15px;
-    background-color: #6c757d; /* Gris más suave */
+    background-color: #6c757d;
     color: white;
     border: none;
     border-radius: 6px;
@@ -139,24 +135,22 @@ body {
     #btn-volver i {
         font-size: 1em;
     }
-/* CONTENEDOR PRINCIPAL - Flexbox para organizar formulario y tabla */
+
 .contenedor-principal {
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    flex-wrap: wrap;
     gap: 30px;
-    padding: 30px 50px; /* Más padding */
-    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 30px 50px;
+    flex-grow: 1;
 }
 
-
-/* LISTA DE USUARIOS - Estilo de tabla mejorado */
 .lista-usuarios {
-    flex: 2 1 600px; /* Crece más que el formulario */
+    flex: 2 1 600px;
     background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Para tablas anchas en móviles */
+    overflow-x: auto;
 }
 
     .lista-usuarios h3 {
@@ -175,41 +169,39 @@ body {
             color: #00f2fe;
         }
 
-
 table {
     width: 100%;
-    border-collapse: separate; /* Permite border-radius en celdas si se aplica */
-    border-spacing: 0; /* Elimina espacio extra entre celdas */
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 20px;
 }
 
     table th,
     table td {
-        padding: 15px 10px; /* Más padding en celdas */
-        border: 1px solid #e0e0e0; /* Borde más sutil */
+        padding: 15px 10px;
+        border: 1px solid #e0e0e0;
         text-align: left;
     }
 
-    table thead th { /* Estilo para los encabezados de la tabla */
-        background-color: #f8f9fa; /* Fondo claro */
+    table thead th {
+        background-color: #f8f9fa;
         color: #555;
         font-weight: 600;
         border-bottom: 2px solid #ddd;
-        position: sticky; /* Encabezado pegajoso para scroll */
+        position: sticky;
         top: 0;
-        z-index: 1; /* Asegura que el encabezado esté por encima */
+        z-index: 1;
     }
 
-    table tbody tr:nth-child(even) { /* Filas alternas para mejor legibilidad */
+    table tbody tr:nth-child(even) {
         background-color: #fcfcfc;
     }
 
-    table tbody tr:hover { /* Efecto hover en filas */
+    table tbody tr:hover {
         background-color: #e9f5ff;
         cursor: pointer;
     }
 
-/* Estilos para botones de acción en la tabla (Editar/Eliminar) */
 .action-buttons button {
     padding: 8px 12px;
     border: none;
@@ -240,7 +232,6 @@ table {
         transform: translateY(-1px);
     }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
     .contenedor-principal {
         flex-direction: column;
@@ -248,7 +239,7 @@ table {
     }
 
     .registro-usuarios, .lista-usuarios {
-        flex: 1 1 100%; /* Ocupan todo el ancho */
+        flex: 1 1 100%;
     }
 
     .controls-top {
@@ -262,7 +253,7 @@ table {
     }
 
     .usuario .info {
-        display: none; /* Ocultar nombre/rol en pantallas muy pequeñas */
+        display: none;
     }
 
     .avatar {
@@ -287,8 +278,6 @@ table {
     }
 }
 
-
-/* Modo oscuro (similar a otras páginas) */
 body.modo-oscuro {
     background: linear-gradient(to right, #2c3e50, #000000);
     color: #e2e6ea;
@@ -354,11 +343,11 @@ body.modo-oscuro {
         }
 
             body.modo-oscuro .registro-usuarios h3 i {
-                color: #00f2fe; /* Mantiene el color de acento */
+                color: #00f2fe;
             }
 
             body.modo-oscuro .lista-usuarios h3 i {
-                color: #4facfe; /* Mantiene el color de acento */
+                color: #4facfe;
             }
 
         body.modo-oscuro .registro-usuarios label {
@@ -426,3 +415,102 @@ body.modo-oscuro {
         body.modo-oscuro .delete-button:hover {
             background-color: #a71d2a;
         }
+
+.filtros-auditoria {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    align-items: center;
+}
+
+.filtro-grupo {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px 12px;
+    flex: 1;
+}
+
+    .filtro-grupo input, .filtro-grupo select {
+        border: none;
+        outline: none;
+        padding: 8px;
+        width: 100%;
+        background: transparent;
+        font-size: 0.9em;
+    }
+
+#btn-limpiar-filtros {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    #btn-limpiar-filtros:hover {
+        background: #343a40;
+    }
+
+body.modo-oscuro .filtros-auditoria {
+    background-color: #2c2c2c;
+    border-color: #444;
+}
+
+body.modo-oscuro .filtro-grupo {
+    background-color: #1e1e1e;
+    border-color: #555;
+    color: white;
+}
+
+    body.modo-oscuro .filtro-grupo input,
+    body.modo-oscuro .filtro-grupo select {
+        color: white;
+    }
+
+.acciones-exportar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-exp {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+    color: white;
+}
+
+    .btn-exp.csv {
+        background-color: #28a745;
+    }
+
+        .btn-exp.csv:hover {
+            background-color: #218838;
+        }
+
+    .btn-exp.pdf {
+        background-color: #dc3545;
+    }
+
+        .btn-exp.pdf:hover {
+            background-color: #c82333;
+        }
+
+body.modo-oscuro .btn-exp {
+    opacity: 0.9;
+}

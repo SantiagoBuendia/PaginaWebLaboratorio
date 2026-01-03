@@ -5,18 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Pregunta</title>
 
-    <!-- 1. Estilos Globales (Header, Fondo, Reset) -->
     <link rel="stylesheet" href="css/gestionEvaluaciones.css">
 
-    <!-- 2. Estilos ESPECÍFICOS para esta página -->
     <link rel="stylesheet" href="css/agregarPregunta.css">
 
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <!-- HEADER (Estilo viene de gestionEvaluaciones.css) -->
     <div class="header">
         <div class="usuario">
             <div class="info">
@@ -26,15 +22,12 @@
         </div>
     </div>
 
-    <!-- Botón Volver (Estilo viene de gestionEvaluaciones.css) -->
     <a href="gestionEvaluaciones.html" id="btn-volver">
         <i class="fas fa-arrow-left"></i> Volver al listado
     </a>
 
-    <!-- Contenedor Flex -->
     <div class="contenedor-principal" style="justify-content: center;">
 
-        <!-- TARJETA DEL FORMULARIO (Estilo de agregarPregunta.css) -->
         <div class="card-pregunta-container">
             <h2 class="titulo-seccion">
                 <i class="fas fa-plus-circle"></i> Nueva Pregunta
@@ -43,13 +36,11 @@
             <form id="form-nueva-pregunta">
                 <input type="hidden" id="examen_id" name="examen_id">
 
-                <!-- Campo Pregunta -->
                 <div>
                     <label class="label-moderno">Enunciado de la Pregunta:</label>
                     <textarea id="pregunta" name="pregunta" class="input-moderno" rows="3" required placeholder="Escribe aquí la pregunta..."></textarea>
                 </div>
 
-                <!-- Campo Puntos -->
                 <div style="display: flex; gap: 20px;">
                     <div style="flex: 1;">
                         <label class="label-moderno">Puntos:</label>
@@ -57,7 +48,6 @@
                     </div>
                 </div>
 
-                <!-- Campo Explicación -->
                 <div>
                     <label class="label-moderno">Explicación (Opcional):</label>
                     <textarea id="explicacion" name="explicacion" class="input-moderno" rows="2" placeholder="Retroalimentación para el estudiante..."></textarea>
@@ -65,7 +55,6 @@
 
                 <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
 
-                <!-- SECCIÓN DE OPCIONES -->
                 <div>
                     <label class="label-moderno" style="font-size: 1.1em;">Opciones de Respuesta:</label>
                     <p style="font-size: 0.9em; color: #666; margin-bottom: 15px;">
@@ -73,7 +62,6 @@
                     </p>
 
                     <div id="contenedor-opciones" class="contenedor-opciones">
-                        <!-- Las opciones se insertan aquí con JS -->
                     </div>
 
                     <button type="button" class="btn-agregar-opcion" onclick="agregarCampoOpcion()">
@@ -81,7 +69,6 @@
                     </button>
                 </div>
 
-                <!-- BOTÓN GUARDAR -->
                 <div style="margin-top: 30px; text-align: right;">
                     <button type="submit" class="btn-guardar-final">
                         <i class="fas fa-save"></i> Guardar Pregunta

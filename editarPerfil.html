@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil</title>
     <link rel="stylesheet" href="css/editarPerfil.css">
 </head>
@@ -9,12 +10,13 @@
     <div class="perfil-container">
         <h2>Editar Perfil</h2>
 
-        <div class="foto-perfil">
-            <img id="foto-preview" src="img/none.png" alt="Foto de perfil">
-            <input type="file" id="foto" accept="image/*">
-        </div>
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" enctype="multipart/form-data">
 
-        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post">
+            <div class="foto-perfil">
+                <img id="foto-preview" src="img/none.png" alt="Foto de perfil">
+                <input type="file" id="foto" name="foto" accept="image/*">
+            </div>
+
             <div class="form-group">
                 <label for="nombren">Nombre:</label>
                 <input type="text" id="nombren" name="nombren" required>
@@ -22,7 +24,7 @@
 
             <div class="form-group">
                 <label for="contrasenan">Nueva Contraseña:</label>
-                <input type="password" id="contrasenan" name="contrasenan">
+                <input type="password" id="contrasenan" name="contrasenan" required>
                 <label><input type="checkbox" id="ver-contra"> Mostrar contraseña</label>
             </div>
 
@@ -34,11 +36,12 @@
             <div class="form-group no-editable">
                 <label>Rol:</label>
                 <span id="rol-usuario">Rol</span>
+                <input type="hidden" id="rol-hidden" name="rol">
             </div>
 
             <input type="hidden" name="accion" value="actualizaru">
             <input type="hidden" id="id-hidden" name="id">
-
+            <input type="hidden" id="auditor-hidden" name="usuario_id">
 
             <div class="form-actions">
                 <button type="submit">Guardar Cambios</button>

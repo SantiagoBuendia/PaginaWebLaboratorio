@@ -3,9 +3,10 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informacion Proyecto</title>
     <link rel="stylesheet" href="css/informacionProyecto.css">
-    <!-- ¡IMPORTANTE! Incluye Font Awesome si no lo has hecho ya -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -18,7 +19,7 @@
             </div>
         </div>
         <div class="menu-desplegable-container">
-            <!-- Cambia el "≡" por un icono de Font Awesome -->
+
             <button class="boton-menu" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             <div id="opciones-menu" class="opciones-menu oculto">
                 <button onclick="cambiarColor()">Cambiar Color</button>
@@ -26,23 +27,19 @@
                 <button onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
-
     </div>
 
-    <!-- Mueve el botón "Volver" dentro de main-container o ajusta su posición con CSS -->
-    <!-- Para este diseño, lo pondremos justo encima del main-container y lo flotaremos/centraremos -->
     <div class="controls-top">
         <button id="btn-volver" onclick="volverAlMenu()"><i class="fas fa-arrow-left"></i> Volver</button>
     </div>
 
-
     <div class="main-container">
         <div class="sidebar">
-            <button onclick="mostrarTexto('textoDescripcion')"><i class="fas fa-info-circle"></i> Descripcion</button>
-            <button onclick="mostrarTexto('textoObjetivosAlcances')"><i class="fas fa-bullseye"></i> Objetivos y alcances</button>
-            <button id="btn-documentacion" onclick="mostrarTexto('textoDocumentacion')"><i class="fas fa-file-alt"></i> Documentacion tecnica</button>
-            <button onclick="mostrarTexto('textoPreguntas')"><i class="fas fa-question-circle"></i> Preguntas frecuentes</button>
-            <button onclick="mostrarTexto('textoCreditos')"><i class="fas fa-users-cog"></i> Creditos y reconocimiento</button>
+            <button onclick="mostrarTexto('textoDescripcion', this)"><i class="fas fa-info-circle"></i> Descripcion</button>
+            <button onclick="mostrarTexto('textoObjetivosAlcances', this)"><i class="fas fa-bullseye"></i> Objetivos y alcances</button>
+            <button id="btn-documentacion" onclick="mostrarTexto('textoDocumentacion', this)"><i class="fas fa-file-alt"></i> Documentacion tecnica</button>
+            <button onclick="mostrarTexto('textoPreguntas', this)"><i class="fas fa-question-circle"></i> Preguntas frecuentes</button>
+            <button onclick="mostrarTexto('textoCreditos', this)"><i class="fas fa-users-cog"></i> Creditos y reconocimiento</button>
         </div>
 
         <div class="content" id="contenido">
@@ -50,7 +47,6 @@
             <p>Selecciona una opcion para ver mas informacion</p>
         </div>
     </div>
-
 
     <script src="js/informacionProyecto.js"></script>
 </body>

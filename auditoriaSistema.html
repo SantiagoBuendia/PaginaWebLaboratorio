@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
     <link rel="stylesheet" href="css/adutoriaSistema.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
@@ -23,16 +26,41 @@
                 <button onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
-
     </div>
 
     <button id="btn-volver" onclick="volverAlMenu()">Volver</button>
 
     <div class="contenedor-principal">
 
-        <!-- Lista de usuarios -->
         <div class="lista-usuarios">
-            <h3>Audiotira registrados</h3>
+            <h3><i class="fas fa-history"></i> Auditoría del Sistema</h3>
+
+            <div class="acciones-exportar">
+                <button onclick="exportarCSV()" class="btn-exp csv"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+                <button onclick="exportarPDF()" class="btn-exp pdf"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+            </div>
+
+            <div class="filtros-auditoria">
+                <div class="filtro-grupo">
+                    <label for="f-usuario"><i class="fas fa-user"></i></label>
+                    <input type="text" id="f-usuario" placeholder="Filtrar por usuario...">
+                </div>
+                <div class="filtro-grupo">
+                    <label for="f-accion"><i class="fas fa-bolt"></i></label>
+                    <select id="f-accion">
+                        <option value="todos">Todas las acciones</option>
+                        <option value="INSERT">INSERT</option>
+                        <option value="UPDATE">UPDATE</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo">
+                    <label for="f-fecha"><i class="fas fa-calendar-alt"></i></label>
+                    <input type="date" id="f-fecha">
+                </div>
+                <button id="btn-limpiar-filtros" title="Limpiar Filtros"><i class="fas fa-eraser"></i></button>
+            </div>
+
             <div id="tabla-usuarios">Cargando...</div>
         </div>
     </div>

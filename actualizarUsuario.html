@@ -9,12 +9,13 @@
     <div class="perfil-container">
         <h2>Editar Perfil</h2>
 
-        <div class="foto-perfil">
-            <img id="foto-preview" src="img/none.png" alt="Foto de perfil">
-            <input type="file" id="foto" name="foto" accept="image/*">
-        </div>
-
         <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" enctype="multipart/form-data">
+
+            <div class="foto-perfil">
+                <img id="foto-preview" src="img/none.png" alt="Foto de perfil">
+                <input type="file" id="foto" name="foto" accept="image/*">
+            </div>
+
             <div class="form-group">
                 <label for="nombren">Nombre:</label>
                 <input type="text" id="nombren" name="nombren" required>
@@ -33,7 +34,6 @@
                     <option value="estudiante">Estudiante</option>
                 </select>
             </div>
-
 
             <div class="form-group">
                 <label for="contrasenan">Nueva Contraseña:</label>

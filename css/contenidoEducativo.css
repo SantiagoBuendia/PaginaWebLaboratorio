@@ -1,5 +1,4 @@
-﻿/* Reset básico */
-body, html {
+﻿body, html {
     width: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,7 +6,6 @@ body, html {
     color: #333;
 }
 
-/* HEADER */
 .header {
     background-color: #003366;
     color: white;
@@ -35,7 +33,6 @@ body, html {
     line-height: 1.2;
 }
 
-/* BOTÓN VOLVER */
 #btn-volver {
     margin: 20px;
     padding: 12px 24px;
@@ -52,7 +49,6 @@ body, html {
         background-color: #0056b3;
     }
 
-/* MENÚ DESPLEGABLE */
 .menu-desplegable-container {
     position: relative;
     display: inline-block;
@@ -99,8 +95,6 @@ body, html {
     display: none;
 }
 
-
-/* FILTROS */
 .filtros {
     display: flex;
     flex-direction: column;
@@ -142,14 +136,14 @@ body, html {
     min-width: 250px;
 }
 
-/* TABLA */
 .lista-usuarios {
     background-color: #ffffff;
-    margin: 0 auto 30px auto;
-    padding: 25px;
+    width: 95%;
     max-width: 1000px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 0 auto 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
     .lista-usuarios h3 {
@@ -162,6 +156,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     font-size: 15px;
+    min-width: 800px;
 }
 
     table th,
@@ -185,7 +180,12 @@ table {
             text-decoration: underline;
         }
 
-/* MODO OSCURO */
+#tabla-recursos {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 body.modo-oscuro {
     background-color: #121212;
     color: white;
@@ -204,3 +204,31 @@ body.modo-oscuro {
     border-color: #555;
 }
 
+@media (max-width: 768px) {
+    .header {
+        padding: 10px;
+    }
+
+    .info span {
+        display: none;
+    }
+
+    .filtros h1 {
+        font-size: 1.4rem;
+    }
+
+    .filtros-fila {
+        flex-direction: column;
+    }
+
+    .filtros input[type="text"],
+    .filtros select,
+    .btn-agregar {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    #btn-volver {
+        width: 95%;
+    }
+}

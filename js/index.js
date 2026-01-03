@@ -1,5 +1,4 @@
-﻿
-const showHiddenPass = (loginPass, loginEye) => {
+﻿const showHiddenPass = (loginPass, loginEye) => {
     const input = document.getElementById(loginPass),
         iconEye = document.getElementById(loginEye);
 

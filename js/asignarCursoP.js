@@ -34,7 +34,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const id = getParametroURL('id');
     const cookieId = getCookie('id');
 
-
     console.log("Valor de nombre en URL:", nombre);
     console.log("Elemento inputNombre:", document.getElementById("nombren"));
 

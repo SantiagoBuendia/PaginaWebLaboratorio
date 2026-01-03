@@ -1,5 +1,4 @@
-﻿// ======= AUTENTICACIÓN Y CARGA DE USUARIO (Funciones comunes) =======
-function getToken() {
+﻿function getToken() {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
         const [key, value] = c.split('=');
@@ -20,98 +19,168 @@ function getCookie(nombre) {
 const token = getToken();
 const nombreUsuario = getCookie('usuario');
 const rolUsuario = getCookie('rol');
-const idUsuario = getCookie('id'); // ID genérico para el usuario logueado
+const idUsuario = getCookie('id');
 
-// Redirección si no hay token (se ejecuta inmediatamente)
-if (!token) {
-    alert("Sesión expirada o no iniciada. Redirigiendo al inicio de sesión.");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+if (!token && !window.location.pathname.includes('index.html')) {
+    alert("Sesión expirada o no iniciada.");
+    window.location.href = 'index.html';
 }
 
-// ======= FUNCIONES DE INTERFAZ GENERAL =======
+const paginaActual = window.location.pathname;
+
+function verificarAcceso() {
+    if (paginaActual.includes('administrador.html') && rolUsuario !== 'administrador') {
+        window.location.href = 'index.html';
+    } else if (paginaActual.includes('profesor.html') && rolUsuario !== 'profesor') {
+        window.location.href = 'index.html';
+    } else if (paginaActual.includes('estudiante.html') && rolUsuario !== 'estudiante') {
+        window.location.href = 'index.html';
+    }
+}
+verificarAcceso();
+
+const STORAGE_KEY_FAV = `favs_${idUsuario}`;
+const STORAGE_KEY_REC = `recientes_${idUsuario}`;
+
+function getFavoritos() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY_FAV)) || [];
+}
+
+function getRecientes() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY_REC)) || [];
+}
+
+function registrarAcceso(id, nombre, icono, url) {
+    let recientes = getRecientes();
+
+    recientes = recientes.filter(m => m.id !== id);
+    recientes.unshift({ id, nombre, icono, url });
+
+    recientes = recientes.slice(0, 5);
+    localStorage.setItem(STORAGE_KEY_REC, JSON.stringify(recientes));
+    localStorage.setItem('origen', window.location.href);
+}
+
+function toggleFavorito(id, nombre, icono, url) {
+    let favoritos = getFavoritos();
+    const index = favoritos.findIndex(m => m.id === id);
+
+    if (index > -1) {
+        favoritos.splice(index, 1);
+    } else {
+        favoritos.push({ id, nombre, icono, url });
+    }
+
+    localStorage.setItem(STORAGE_KEY_FAV, JSON.stringify(favoritos));
+    renderAccesoRapido();
+    actualizarIconosEstrella();
+}
+
+function renderAccesoRapido() {
+    const contenedor = document.getElementById('contenedor-rapido');
+    if (!contenedor) return;
+
+    const favoritos = getFavoritos();
+    const recientes = getRecientes();
+
+    const favoritosIds = new Set(favoritos.map(f => f.id));
+    const combinados = [...favoritos, ...recientes.filter(r => !favoritosIds.has(r.id))];
+
+    const mostrar = combinados.slice(0, 5);
+
+    if (mostrar.length === 0) {
+        contenedor.innerHTML = "<p style='color:gray; font-size:0.9rem; padding-left:20px;'>No hay actividad reciente.</p>";
+        return;
+    }
+
+    contenedor.innerHTML = mostrar.map(m => `
+        <a href="${m.url}" class="card-mini" onclick="registrarAcceso('${m.id}', '${m.nombre}', '${m.icono}', '${m.url}')">
+            <i class="${m.icono}"></i>
+            <span>${m.nombre}</span>
+        </a>
+    `).join('');
+}
+
+function actualizarIconosEstrella() {
+    const favoritos = getFavoritos();
+    const idsFavoritos = favoritos.map(f => f.id);
+
+    const todasLasEstrellas = document.querySelectorAll('[id^="star-"]');
+
+    todasLasEstrellas.forEach(star => {
+        const moduloId = star.id.replace('star-', '');
+        if (idsFavoritos.includes(moduloId)) {
+            star.className = "fas fa-star";
+            star.style.color = "#f1c40f";
+        } else {
+            star.className = "far fa-star";
+            star.style.color = "inherit";
+        }
+    });
+}
+
 function cerrarSesion() {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    const expires = "expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie = `token=; path=/; ${expires}`;
+    document.cookie = `usuario=; path=/; ${expires}`;
+    document.cookie = `rol=; path=/; ${expires}`;
+    document.cookie = `id=; path=/; ${expires}`;
+    window.location.href = 'index.html';
 }
 
 function toggleMenu() {
     const menu = document.getElementById("opciones-menu");
-    menu.classList.toggle("oculto");
+    if (menu) menu.classList.toggle("oculto");
 }
-
-window.addEventListener('click', function (event) {
-    const menu = document.getElementById("opciones-menu");
-    const boton = document.querySelector(".boton-menu");
-    if (!menu.contains(event.target) && !boton.contains(event.target)) {
-        menu.classList.add("oculto");
-    }
-});
-
-// Cierra el menú si se hace clic fuera
-window.addEventListener('click', function (event) {
-    const menu = document.getElementById("opciones-menu");
-    const boton = document.querySelector(".boton-menu");
-    // Asegúrate de que el menú exista antes de intentar usarlo
-    if (menu && boton && !menu.contains(event.target) && !boton.contains(event.target)) {
-        menu.classList.add("oculto");
-    }
-});
-
-let modoOscuro = false; // Variable para controlar el estado del modo oscuro
 
 function cambiarColor() {
     const body = document.body;
     body.classList.toggle("modo-oscuro");
-    modoOscuro = !modoOscuro;
-    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+    localStorage.setItem('modoOscuro', body.classList.contains("modo-oscuro"));
 }
 
-const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
-let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"];
+let indiceTamano = parseInt(localStorage.getItem('indiceTamano')) || 0;
+
+function aplicarTamanoTexto() {
+    const tamano = tamanosTexto[indiceTamano];
+    const elementos = document.querySelectorAll(
+        "#nombre-usuario, #rol-usuario, h1, h2, h3, h4, label, .opciones-menu button, .card h2"
+    );
+    elementos.forEach(elem => elem.style.fontSize = tamano);
+}
 
 function cambiarTexto() {
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
-    const tamano = tamanosTexto[indiceTamano];
-
-    const elementosAfectados = document.querySelectorAll(
-        "#nombre-usuario, #rol-usuario, h1, h2, h3, h4, label, .tab-button, .examen-card h4, .examen-card p, .opciones-menu button"
-    );
-
-    elementosAfectados.forEach(elem => {
-        elem.style.fontSize = tamano;
-    });
+    localStorage.setItem('indiceTamano', indiceTamano);
+    aplicarTamanoTexto();
 }
 
-
-// Se ejecuta cuando el DOM está completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
-    // Rellenar información de usuario
-    if (nombreUsuario) {
-        document.getElementById('nombre-usuario').textContent = nombreUsuario;
-        document.getElementById('profile-pic').src = `img/${idUsuario}.png`;
-    }
+    const nombreElem = document.getElementById('nombre-usuario');
+    const rolElem = document.getElementById('rol-usuario');
+    const picElem = document.getElementById('profile-pic');
 
-    if (rolUsuario) {
-        document.getElementById('rol-usuario').textContent = rolUsuario.charAt(0).toUpperCase() + rolUsuario.slice(1);
-    }
+    if (nombreElem && nombreUsuario) nombreElem.textContent = nombreUsuario;
+    if (rolElem && rolUsuario) rolElem.textContent = rolUsuario.charAt(0).toUpperCase() + rolUsuario.slice(1);
+    if (picElem && idUsuario) picElem.src = `img/${idUsuario}.png`;
 
-    // Cargar preferencia de modo oscuro
     if (localStorage.getItem('modoOscuro') === 'true') {
         document.body.classList.add('modo-oscuro');
-        modoOscuro = true;
     }
 
-    // Aplicar tamaño de texto al cargar la página
     aplicarTamanoTexto();
 
-    // Verificación de rol para la página del profesor
-    if (window.location.pathname.includes('profesor.html')) {
-        if (rolUsuario !== 'profesor') {
-            alert("Acceso denegado. Esta página es solo para profesores.");
-            window.location.href = 'index.html';
-        }
+    if (idUsuario) {
+        renderAccesoRapido();
+        actualizarIconosEstrella();
     }
+
+    window.addEventListener('click', (event) => {
+        const menu = document.getElementById("opciones-menu");
+        const boton = document.querySelector(".boton-menu");
+        if (menu && boton && !menu.contains(event.target) && !boton.contains(event.target)) {
+            menu.classList.add("oculto");
+        }
+    });
 });

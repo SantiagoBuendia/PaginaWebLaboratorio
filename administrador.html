@@ -3,6 +3,7 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador</title>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -28,38 +29,60 @@
         </div>
     </div>
 
+    <section id="seccion-rapida" class="panel">
+        <h2 style="text-align: left; margin-left: 20px;">Recientes y Favoritos</h2>
+        <div id="contenedor-rapido" class="contenedor-cards-pequenas">
+        </div>
+    </section>
+
     <header>
         <h1 style="text-align: center;" class="panel">Panel del Administrador</h1>
     </header>
+
     <main class="panel">
-        <a href="http://localhost/PaginaWebLaboratorio/gestionUsuarios.html"
-           onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/administrador.html')"
-           style="text-decoration: none; color: inherit;">
-            <div class="card evaluaciones">
-                <i class="icon fas fa-users"></i>
-                <h2>Gestión de usuarios</h2>
-            </div>
-        </a>
-        <a href="http://localhost/PaginaWebLaboratorio/auditoriaSistema.html" style="text-decoration: none; color: inherit; ">
-            <div class="card contenido">
-                <i class="icon fas fa-shield-alt"></i>
-                <h2>Auditoría del Sistema</h2>
-            </div>
-        </a>
-        <a href="http://localhost/PaginaWebLaboratorio/informacionProyecto.html" style="text-decoration: none; color: inherit; ">
-            <div class="card seguimiento">
-                <i class="icon fas fa-info-circle"></i>
-                <h2> Información del Proyecto</h2>
-            </div>
-        </a>
+
+        <div class="card-container">
+            <button class="fav-btn" onclick="toggleFavorito('usuarios', 'Gestión de usuarios', 'fas fa-users', 'gestionUsuarios.html')">
+                <i class="far fa-star" id="star-usuarios"></i>
+            </button>
+            <a href="http://localhost/PaginaWebLaboratorio/gestionUsuarios.html"
+               onclick="registrarAcceso('usuarios', 'Gestión de usuarios', 'fas fa-users', 'gestionUsuarios.html')"
+               style="text-decoration: none; color: inherit;">
+                <div class="card evaluaciones">
+                    <i class="icon fas fa-users"></i>
+                    <h2>Gestión de usuarios</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="card-container">
+            <button class="fav-btn" onclick="toggleFavorito('auditoria', 'Auditoría del Sistema', 'fas fa-shield-alt', 'auditoriaSistema.html')">
+                <i class="far fa-star" id="star-auditoria"></i>
+            </button>
+            <a href="http://localhost/PaginaWebLaboratorio/auditoriaSistema.html"
+               onclick="registrarAcceso('auditoria', 'Auditoría del Sistema', 'fas fa-shield-alt', 'auditoriaSistema.html')"
+               style="text-decoration: none; color: inherit; ">
+                <div class="card contenido">
+                    <i class="icon fas fa-shield-alt"></i>
+                    <h2>Auditoría del Sistema</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="card-container">
+            <button class="fav-btn" onclick="toggleFavorito('info', 'Información del Proyecto', 'fas fa-info-circle', 'informacionProyecto.html')">
+                <i class="far fa-star" id="star-info"></i>
+            </button>
+            <a href="http://localhost/PaginaWebLaboratorio/informacionProyecto.html"
+               onclick="registrarAcceso('info', 'Información del Proyecto', 'fas fa-info-circle', 'informacionProyecto.html')"
+               style="text-decoration: none; color: inherit; ">
+                <div class="card seguimiento">
+                    <i class="icon fas fa-info-circle"></i>
+                    <h2> Información del Proyecto</h2>
+                </div>
+            </a>
+        </div>
     </main>
     <script src="js/auth.js"></script>
-    <script>
-        if (rol !== 'administrador') {  
-            alert("Acceso denegado");
-            window.location.href = 'index.html';
-        }
-    </script>
-
 </body>
 </html>

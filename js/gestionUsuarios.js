@@ -15,7 +15,6 @@ if (!token) {
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
 
-
 function getCookie(nombre) {
     const cookies = document.cookie.split('; ');
     for (const c of cookies) {
@@ -29,12 +28,28 @@ const nombre = getCookie('usuario');
 const rol = getCookie('rol');
 const id = getCookie('id');
 
+if (!token) {
+    alert("Sesión no válida. Redirigiendo...");
+    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+}
+
+else if (rol !== 'administrador') {
+    alert("Acceso denegado: No tienes permisos de administrador.");
+
+    if (rol === 'profesor') {
+        window.location.href = 'http://localhost/PaginaWebLaboratorio/profesor.html';
+    } else if (rolSesion === 'estudiante') {
+        window.location.href = 'http://localhost/PaginaWebLaboratorio/estudiante.html';
+    } else {
+        window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    }
+}
+
 if (nombre) {
     document.getElementById('nombre-usuario').textContent = nombre;
     const rutaImagen = `img/${id}.png`;
     document.getElementById('profile-pic').src = rutaImagen;
 }
-
 
 if (rol) {
     document.getElementById('rol-usuario').textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
@@ -53,7 +68,6 @@ function cerrarSesion() {
     window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
 }
 
-
 function toggleMenu() {
     const menu = document.getElementById("opciones-menu");
     menu.classList.toggle("oculto");
@@ -64,18 +78,16 @@ function cambiarColor() {
     const body = document.body;
     body.classList.toggle("modo-oscuro");
     modoOscuro = !modoOscuro;
-    localStorage.setItem('modoOscuro', modoOscuro); // Guarda la preferencia
+    localStorage.setItem('modoOscuro', modoOscuro);
 }
 
-// Cargar preferencia de modo oscuro al iniciar
 if (localStorage.getItem('modoOscuro') === 'true') {
     document.body.classList.add('modo-oscuro');
     modoOscuro = true;
 }
 
-
-const tamanosTexto = ["1rem", "1.15rem", "1.3rem"]; // Ajusta tamaños base
-let indiceTamano = 0; // Se reseteará al recargar, podrías guardarlo en localStorage
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"];
+let indiceTamano = 0;
 
 function cambiarTexto() {
     indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
@@ -90,7 +102,6 @@ function cambiarTexto() {
     });
 }
 
-// Cierra el menú si se hace clic fuera
 window.addEventListener('click', function (event) {
     const menu = document.getElementById("opciones-menu");
     const boton = document.querySelector(".boton-menu");
@@ -116,10 +127,51 @@ function cargarUsuarios() {
 cargarUsuarios();
 
 function confirmarEliminar(idUsuario) {
-    const usuario_id = getCookie('id'); // ID del usuario logueado
+    const usuario_id = getCookie('id');
     if (confirm("¿Estás seguro de eliminar este usuario?")) {
         window.location.href = `/cgi-bin/PaginaWebLaboratorio.exe?accion=eliminaru&id=${idUsuario}&usuario_id=${usuario_id}`;
     }
     return false;
 }
 
+function filtrarTabla() {
+    const textoBusqueda = document.getElementById("filtro-nombre").value.toLowerCase();
+    const rolSeleccionado = document.getElementById("filtro-rol").value.toLowerCase();
+
+    const filas = document.querySelectorAll("#tabla-usuarios table tbody tr");
+
+    filas.forEach(fila => {
+        const nombreCol = fila.cells[1] ? fila.cells[1].textContent.toLowerCase() : "";
+        const rolCol = fila.cells[3] ? fila.cells[3].textContent.toLowerCase() : "";
+
+        const coincideNombre = nombreCol.includes(textoBusqueda);
+        const coincideRol = (rolSeleccionado === "todos" || rolCol === rolSeleccionado);
+
+        if (coincideNombre && coincideRol) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const inputNombre = document.getElementById("filtro-nombre");
+    const inputRol = document.getElementById("filtro-rol");
+
+    if (inputNombre) inputNombre.addEventListener("input", filtrarTabla);
+    if (inputRol) inputRol.addEventListener("change", filtrarTabla);
+});
+
+function cargarUsuarios() {
+    fetch("/cgi-bin/PaginaWebLaboratorio.exe?accion=listaru")
+        .then((res) => res.text())
+        .then((html) => {
+            document.getElementById("tabla-usuarios").innerHTML = html;
+            // IMPORTANTE: Aplicar el filtro por si el usuario ya tenía algo escrito
+            filtrarTabla();
+        })
+        .catch(() => {
+            document.getElementById("tabla-usuarios").innerText = "Error al cargar usuarios.";
+        });
+}

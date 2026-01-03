@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contenido educativo</title>
     <link rel="stylesheet" href="css/contenidoEducativo.css">
 </head>
@@ -25,7 +26,6 @@
                 <button onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
-
     </div>
 
     <button id="btn-volver" onclick="volverAlMenu()">Volver</button>
@@ -47,9 +47,10 @@
             </button>
         </div>
 
-        <!-- Lista de recursos -->
         <div class="lista-usuarios">
-            <div id="tabla-recursos">Cargando...</div>
+            <div id="tabla-recursos-container">
+                <div id="tabla-recursos">Cargando...</div>
+            </div>
         </div>
     </div>
 

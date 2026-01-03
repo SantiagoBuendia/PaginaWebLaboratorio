@@ -34,7 +34,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const id = getParametroURL('id');
     const cookieId = getCookie('id');
 
-
     console.log("Valor de nombre en URL:", nombre);
     console.log("Elemento inputNombre:", document.getElementById("nombren"));
 
@@ -66,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
     fetch(url)
         .then(response => {
             console.log("Respuesta fetch grupos:", response.status, response.statusText, response.headers.get('content-type'));
-            // Leemos como texto para depurar cualquier HTML/errores que devuelva el CGI
+
             return response.text().then(text => ({ ok: response.ok, status: response.status, text }));
         })
         .then(({ ok, status, text }) => {
@@ -81,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 throw new Error("JSON inválido: " + err.message);
             }
 
-            // Poblamos el select
             select.innerHTML = "";
             if (Array.isArray(data) && data.length > 0) {
                 data.forEach(grupo => {

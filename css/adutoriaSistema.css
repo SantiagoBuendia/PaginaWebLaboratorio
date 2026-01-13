@@ -1,11 +1,19 @@
-﻿body {
-    width: 100%;
+﻿* {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     color: #343a40;
     line-height: 1.6;
     animation: fadeInBackground 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 @keyframes fadeInBackground {
@@ -38,6 +46,7 @@
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
 }
 
 .info {
@@ -109,7 +118,7 @@
         }
 
 .oculto {
-    display: none;
+    display: none !important;
 }
 
 #btn-volver {
@@ -121,10 +130,11 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 8px;
+    width: fit-content;
 }
 
     #btn-volver:hover {
@@ -132,25 +142,19 @@
         transform: translateY(-1px);
     }
 
-    #btn-volver i {
-        font-size: 1em;
-    }
-
 .contenedor-principal {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 30px 50px;
+    padding: 20px 25px;
     flex-grow: 1;
+    width: 100%;
 }
 
 .lista-usuarios {
-    flex: 2 1 600px;
+    width: 100%;
     background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
 }
 
     .lista-usuarios h3 {
@@ -166,254 +170,42 @@
 
         .lista-usuarios h3 i {
             margin-right: 10px;
-            color: #00f2fe;
+            color: #4facfe;
         }
 
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-top: 20px;
+.acciones-exportar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-    table th,
-    table td {
-        padding: 15px 10px;
-        border: 1px solid #e0e0e0;
-        text-align: left;
-    }
-
-    table thead th {
-        background-color: #f8f9fa;
-        color: #555;
-        font-weight: 600;
-        border-bottom: 2px solid #ddd;
-        position: sticky;
-        top: 0;
-        z-index: 1;
-    }
-
-    table tbody tr:nth-child(even) {
-        background-color: #fcfcfc;
-    }
-
-    table tbody tr:hover {
-        background-color: #e9f5ff;
-        cursor: pointer;
-    }
-
-.action-buttons button {
-    padding: 8px 12px;
+.btn-exp {
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-right: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 0.9em;
-}
-
-.edit-button {
-    background-color: #007bff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
     color: white;
 }
 
-    .edit-button:hover {
-        background-color: #0056b3;
-        transform: translateY(-1px);
+    .btn-exp.csv {
+        background-color: #28a745;
     }
 
-.delete-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-    .delete-button:hover {
-        background-color: #c82333;
-        transform: translateY(-1px);
-    }
-
-@media (max-width: 900px) {
-    .contenedor-principal {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .registro-usuarios, .lista-usuarios {
-        flex: 1 1 100%;
-    }
-
-    .controls-top {
-        padding-left: 20px;
-    }
-}
-
-@media (max-width: 600px) {
-    .header {
-        padding: 10px 15px;
-    }
-
-    .usuario .info {
-        display: none;
-    }
-
-    .avatar {
-        margin-right: 0;
-    }
-
-    .registro-usuarios, .lista-usuarios {
-        padding: 20px;
-    }
-
-        .registro-usuarios h3, .lista-usuarios h3 {
-            font-size: 1.5em;
-        }
-
-    table th, table td {
-        padding: 10px 5px;
-        font-size: 0.9em;
-    }
-
-    .action-buttons button {
-        padding: 6px 8px;
-    }
-}
-
-body.modo-oscuro {
-    background: linear-gradient(to right, #2c3e50, #000000);
-    color: #e2e6ea;
-}
-
-    body.modo-oscuro .header {
-        background-color: #0a0a0a;
-        box-shadow: 0 4px 15px rgba(255,255,255,0.1);
-    }
-
-    body.modo-oscuro .avatar {
-        border-color: #4facfe;
-        box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
-    }
-
-    body.modo-oscuro .info strong {
-        color: #f0f0f0;
-    }
-
-    body.modo-oscuro .info span {
-        color: #ccc;
-    }
-
-    body.modo-oscuro .boton-menu:hover {
-        background-color: rgba(255,255,255,0.08);
-    }
-
-    body.modo-oscuro .opciones-menu {
-        background-color: #343a40;
-        border-color: #495057;
-        box-shadow: 0px 8px 25px rgba(0,0,0,0.4);
-    }
-
-        body.modo-oscuro .opciones-menu button {
-            color: #e2e6ea;
-        }
-
-            body.modo-oscuro .opciones-menu button:hover {
-                background-color: #495057;
-                color: white;
-            }
-
-    body.modo-oscuro #btn-volver {
-        background-color: #0a0a0a;
-        box-shadow: 0 4px 10px rgba(255,255,255,0.1);
-    }
-
-        body.modo-oscuro #btn-volver:hover {
-            background-color: #4facfe;
-            box-shadow: 0 6px 15px rgba(79, 172, 254, 0.4);
-        }
-
-    body.modo-oscuro .registro-usuarios,
-    body.modo-oscuro .lista-usuarios {
-        background-color: #1e1e1e;
-        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
-    }
-
-        body.modo-oscuro .registro-usuarios h3,
-        body.modo-oscuro .lista-usuarios h3 {
-            color: #f0f0f0;
-            border-bottom-color: #444;
-        }
-
-            body.modo-oscuro .registro-usuarios h3 i {
-                color: #00f2fe;
-            }
-
-            body.modo-oscuro .lista-usuarios h3 i {
-                color: #4facfe;
-            }
-
-        body.modo-oscuro .registro-usuarios label {
-            color: #ccc;
-        }
-
-        body.modo-oscuro .registro-usuarios input:not([type="hidden"]),
-        body.modo-oscuro .registro-usuarios select {
-            background-color: #2c2c2c;
-            color: #e2e6ea;
-            border-color: #555;
-        }
-
-            body.modo-oscuro .registro-usuarios input:focus,
-            body.modo-oscuro .registro-usuarios select:focus {
-                border-color: #00f2fe;
-                box-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
-            }
-
-        body.modo-oscuro .registro-usuarios .submit-button {
+        .btn-exp.csv:hover {
             background-color: #218838;
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
         }
 
-            body.modo-oscuro .registro-usuarios .submit-button:hover {
-                background-color: #1a6d2c;
-                box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
-            }
-
-    body.modo-oscuro table thead th {
-        background-color: #2c2c2c;
-        color: #f0f0f0;
-        border-bottom-color: #444;
+    .btn-exp.pdf {
+        background-color: #dc3545;
     }
 
-    body.modo-oscuro table tbody tr {
-        color: #e2e6ea;
-    }
-
-        body.modo-oscuro table tbody tr:nth-child(even) {
-            background-color: #242424;
-        }
-
-        body.modo-oscuro table tbody tr:hover {
-            background-color: #3a3a3a;
-        }
-
-    body.modo-oscuro table th,
-    body.modo-oscuro table td {
-        border-color: #444;
-    }
-
-    body.modo-oscuro .edit-button {
-        background-color: #0056b3;
-    }
-
-        body.modo-oscuro .edit-button:hover {
-            background-color: #003366;
-        }
-
-    body.modo-oscuro .delete-button {
-        background-color: #c82333;
-    }
-
-        body.modo-oscuro .delete-button:hover {
-            background-color: #a71d2a;
+        .btn-exp.pdf:hover {
+            background-color: #c82333;
         }
 
 .filtros-auditoria {
@@ -460,57 +252,103 @@ body.modo-oscuro {
         background: #343a40;
     }
 
-body.modo-oscuro .filtros-auditoria {
-    background-color: #2c2c2c;
-    border-color: #444;
+#tabla-usuarios {
+    overflow-x: auto;
+    width: 100%;
 }
 
-body.modo-oscuro .filtro-grupo {
-    background-color: #1e1e1e;
-    border-color: #555;
-    color: white;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-    body.modo-oscuro .filtro-grupo input,
-    body.modo-oscuro .filtro-grupo select {
+    table th, table td {
+        padding: 15px;
+        border: 1px solid #eee;
+        text-align: left;
+    }
+
+    table thead th {
+        background-color: #f8f9fa;
+        color: #555;
+        font-weight: 600;
+        border-bottom: 2px solid #ddd;
+        position: sticky;
+        top: 0;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #fcfcfc;
+    }
+
+    table tbody tr:hover {
+        background-color: #e9f5ff;
+    }
+
+body.modo-oscuro {
+    background-color: #121212;
+    color: #e2e6ea;
+}
+
+    body.modo-oscuro .header {
+        background-color: #000;
+    }
+
+    body.modo-oscuro .lista-usuarios, body.modo-oscuro .opciones-menu {
+        background-color: #1e1e1e;
+        border-color: #333;
+    }
+
+    body.modo-oscuro .filtros-auditoria {
+        background-color: #2c2c2c;
+        border-color: #444;
+    }
+
+    body.modo-oscuro .filtro-grupo {
+        background-color: #1e1e1e;
+        border-color: #555;
+    }
+
+        body.modo-oscuro .filtro-grupo input, body.modo-oscuro .filtro-grupo select {
+            color: white;
+        }
+
+    body.modo-oscuro table thead th {
+        background-color: #2c2c2c;
         color: white;
+        border-bottom-color: #444;
     }
 
-.acciones-exportar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    body.modo-oscuro table td {
+        border-color: #333;
+    }
+
+    body.modo-oscuro table tbody tr:nth-child(even) {
+        background-color: #242424;
+    }
+
+    body.modo-oscuro table tbody tr:hover {
+        background-color: #333;
+    }
+
+@media (max-width: 900px) {
+    .contenedor-principal {
+        padding: 15px;
+    }
+
+    .filtros-auditoria {
+        flex-wrap: wrap;
+    }
 }
 
-.btn-exp {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: 0.3s;
-    color: white;
-}
-
-    .btn-exp.csv {
-        background-color: #28a745;
+@media (max-width: 600px) {
+    .info {
+        display: none;
     }
 
-        .btn-exp.csv:hover {
-            background-color: #218838;
-        }
-
-    .btn-exp.pdf {
-        background-color: #dc3545;
+    .filtros-auditoria {
+        flex-direction: column;
+        align-items: stretch;
     }
-
-        .btn-exp.pdf:hover {
-            background-color: #c82333;
-        }
-
-body.modo-oscuro .btn-exp {
-    opacity: 0.9;
 }

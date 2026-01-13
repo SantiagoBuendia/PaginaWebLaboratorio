@@ -13,7 +13,7 @@
     <div class="login">
         <img src="img/fondoquimica.jpg" alt="imagen de login" class="login__img" />
 
-        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" class="login__form">
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" class="login__form" id="login-form">
 
             <h1 class="login__title">Acceso Laboratorio</h1>
 
@@ -45,20 +45,14 @@
 
                 <div class="login__check-group">
 
-                    <input type="checkbox" class="login_check-input" />
+                    <input type="checkbox" class="login__check-input" id="recordar" />
                     <label class="login__check-label">Recordar</label>
                 </div>
-
-                <a href="#" class="login__forgot">Has olvidado tu contraseña</a>
             </div>
 
             <input type="hidden" name="accion" value="verificar">
 
             <input type="submit" value="Ingresar" class="login__button">
-
-            <p class="login__register">
-                No tienes una cuenta? <a href="#">Registrate</a>
-            </p>
         </form>
     </div>
 

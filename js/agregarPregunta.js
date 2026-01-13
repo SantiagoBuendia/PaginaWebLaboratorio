@@ -111,3 +111,22 @@ async function guardarOpciones(preguntaID) {
     const json = await response.json();
     if (!json.success) throw new Error("Error al guardar opciones.");
 }
+
+function aplicarPreferenciaColor() {
+    const modoOscuroGurdado = localStorage.getItem('modoOscuro');
+    if (modoOscuroGurdado === 'true') {
+        document.body.classList.add('modo-oscuro');
+    } else {
+        document.body.classList.remove('modo-oscuro');
+    }
+}
+
+aplicarPreferenciaColor();
+
+function cambiarColor() {
+    const body = document.body;
+    const esOscuro = body.classList.toggle("modo-oscuro");
+    localStorage.setItem('modoOscuro', esOscuro);
+}
+
+document.addEventListener('DOMContentLoaded', aplicarPreferenciaColor);

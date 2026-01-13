@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Seguimiento de Progreso - Profesor</title>
-    <link rel="stylesheet" href="css/verExamen.css">
+    <link rel="stylesheet" href="css/seguimiento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -102,6 +102,43 @@
         </div>
     </div>
 
+    <div id="modal-simulaciones" class="modal-personalizado oculto">
+        <div class="modal-contenido">
+            <span class="cerrar-modal" onclick="cerrarModal('modal-simulaciones')">&times;</span>
+            <h3 style="color:#003366;"><i class="fas fa-flask"></i> Historial de Simulaciones</h3>
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="position: sticky; top: 0; background: #003366; color: white;">
+                        <tr>
+                            <th style="padding: 10px;">Experimento</th>
+                            <th>Fecha</th>
+                            <th>Duración</th>
+                            <th>Tipo</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla-simulaciones"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-detalle-simulacion" class="modal-personalizado oculto">
+        <div class="modal-contenido">
+            <span class="cerrar-modal" onclick="cerrarModal('modal-detalle-simulacion')">&times;</span>
+            <h3 style="color:#003366;"><i class="fas fa-search"></i> Detalles de la Sesión</h3>
+            <div style="display: flex; gap: 20px; text-align: left;">
+                <div style="flex: 1;">
+                    <h4 style="border-bottom: 2px solid #17a2b8;">Resultados Obtenidos</h4>
+                    <ul id="lista-resultados" style="list-style: none; padding: 0;"></ul>
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="border-bottom: 2px solid #6c757d;">Bitácora de Eventos</h4>
+                    <ul id="lista-eventos" style="list-style: none; padding: 0; font-size: 0.85em; max-height: 300px; overflow-y: auto;"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/seguimiento.js"></script>
 </body>
 </html>

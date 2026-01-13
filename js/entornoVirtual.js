@@ -185,11 +185,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function abrirSimuladorVR() {
-    console.log("Intentando abrir simulador para el usuario ID:", idUsuario); // <-- AÑADE ESTO
+function abrirSimuladorVR(tipo) {
+    console.log("Intentando abrir simulación de:", tipo, "para usuario:", idUsuario);
 
     if (!idUsuario || idUsuario === "0") {
-        alert("Error: No se encontró un ID de usuario válido en la sesión.");
+        alert("Error: No hay un ID de usuario válido.");
         return;
     }
 
@@ -198,7 +198,30 @@ function abrirSimuladorVR() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
             accion: "abrirSimulador",
-            usuario_id: idUsuario
+            usuario_id: idUsuario,
+            experimento: tipo
         })
     })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en la red o CGI no encontrado");
+            return response.json();
+        })
+        .then(data => {
+            console.log("Respuesta del servidor para " + tipo + ":", data);
+            // Opcional: mostrar un aviso visual al usuario
+            const msg = document.createElement("div");
+            msg.innerHTML = "🚀 Abriendo " + tipo + "...";
+            msg.style = "position:fixed; top:20px; right:20px; background:green; color:white; padding:10px; border-radius:5px; z-index:1000;";
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
+        })
+        .catch(err => {
+            console.error("Error crítico:", err);
+            alert("No se pudo iniciar el simulador. Revisa la consola.");
+        });
+}
+
+function volverAlMenu() {
+    const origen = localStorage.getItem('origen') || 'menu.html';
+    window.location.href = origen;
 }

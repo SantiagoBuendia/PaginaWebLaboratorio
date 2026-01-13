@@ -290,8 +290,109 @@ function renderizarTabla(lista) {
                 <td style="text-align:center;">${est.total_evals}</td>
                 <td style="font-weight:bold; color:${est.promedio >= 7 ? '#28a745' : '#dc3545'}">${est.promedio.toFixed(2)}</td>
                 <td>Reciente</td>
-                <td><button onclick="verDetalleIndividual(${est.id})" class="btn-entrar" style="padding:5px 10px; font-size:0.8em;">Ver Perfil</button></td>
+                <td style="display: flex; gap: 5px; padding: 12px;">
+                    <button onclick="verDetalleIndividual(${est.id})" class="btn-entrar" style="padding:5px 8px; font-size:0.75em;">
+                        <i class="fas fa-user"></i> Perfil
+                    </button>
+                    <button onclick="abrirModalSimulaciones(${est.id})" class="btn-simulacion" style="background-color: #17a2b8; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75em;">
+                        <i class="fas fa-flask"></i> Simulaciones
+                    </button>
+                </td>
             </tr>
         `;
     });
+}
+
+function abrirModalSimulaciones(idEstudiante) {
+    abrirModal('modal-simulaciones');
+
+    const modal = document.getElementById('modal-simulaciones');
+    const tbody = document.getElementById('cuerpo-tabla-simulaciones');
+
+    tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Cargando historial...</td></tr>";
+    modal.classList.remove('oculto');
+
+    fetch(`/cgi-bin/PaginaWebLaboratorio.exe?accion=obtenerSeguimientoEstudiante&estudiante_id=${idEstudiante}`)
+        .then(r => r.json())
+        .then(data => {
+            tbody.innerHTML = "";
+            if (!data || data.length === 0) {
+                tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>No hay simulaciones registradas.</td></tr>";
+                return;
+            }
+
+            data.forEach(sim => {
+                const mins = Math.floor(sim.duracion / 60);
+                const segs = sim.duracion % 60;
+                tbody.innerHTML += `
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;">${sim.experimento}</td>
+                        <td>${sim.fecha}</td>
+                        <td>${mins}m ${segs}s</td>
+                        <td><span class="badge-puntos" style="background:#6c757d; font-size:0.7em;">${sim.dispositivo}</span></td>
+                        <td>
+                            <button onclick="abrirDetalleSimulacion(${sim.id})" class="btn-entrar" style="padding:3px 8px; font-size:0.8em;">
+                                <i class="fas fa-eye"></i> Detalle
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            tbody.innerHTML = "<tr><td colspan='5' style='color:red; text-align:center;'>Error al conectar con el servidor</td></tr>";
+        });
+}
+
+function abrirDetalleSimulacion(idSimulacion) {
+    abrirModal('modal-detalle-simulacion');
+
+    const modal = document.getElementById('modal-detalle-simulacion');
+    const listaRes = document.getElementById('lista-resultados');
+    const listaEve = document.getElementById('lista-eventos');
+
+    modal.classList.remove('oculto');
+    listaRes.innerHTML = "<li>Cargando...</li>";
+    listaEve.innerHTML = "<li>Cargando...</li>";
+
+    fetch(`/cgi-bin/PaginaWebLaboratorio.exe?accion=obtenerDetallesSimulacion&simulacion_id=${idSimulacion}`)
+        .then(r => r.json())
+        .then(data => {
+            listaRes.innerHTML = data.resultados.length > 0
+                ? data.resultados.map(r => `<li><strong>${r.var}:</strong> ${r.val} ${r.uni}</li>`).join('')
+                : "<li>Sin resultados numéricos</li>";
+
+            listaEve.innerHTML = data.eventos.length > 0
+                ? data.eventos.map(e => `<li><small style="color:#007bff">[${e.t}s]</small> ${e.nom}</li>`).join('')
+                : "<li>Sin eventos registrados</li>";
+        });
+}
+
+function cerrarModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.add('oculto');
+    }
+
+    const modalesVisibles = document.querySelectorAll('.modal-personalizado:not(.oculto)');
+    if (modalesVisibles.length === 0) {
+        document.body.classList.remove('modal-abierto');
+    }
+}
+
+function abrirModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.remove('oculto');
+        document.body.classList.add('modal-abierto');
+    } else {
+        console.error("No se encontró el modal con ID: " + id);
+    }
+}
+
+window.onclick = function (event) {
+    if (event.target.classList.contains('modal-personalizado')) {
+        cerrarModal(event.target.id);
+    }
 }

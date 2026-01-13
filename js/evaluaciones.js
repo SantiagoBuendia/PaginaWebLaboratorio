@@ -75,3 +75,49 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 });
+
+const tamanosTexto = ["1rem", "1.15rem", "1.3rem"];
+let indiceTamano = parseInt(localStorage.getItem('indiceTamano')) || 0;
+
+function aplicarPreferencias() {
+    if (localStorage.getItem('modoOscuro') === 'true') {
+        document.body.classList.add('modo-oscuro');
+    } else {
+        document.body.classList.remove('modo-oscuro');
+    }
+    aplicarTamanoTexto();
+}
+
+function cambiarColor() {
+    const esOscuro = document.body.classList.toggle("modo-oscuro");
+    localStorage.setItem('modoOscuro', esOscuro);
+}
+
+function cambiarTexto() {
+    indiceTamano = (indiceTamano + 1) % tamanosTexto.length;
+    localStorage.setItem('indiceTamano', indiceTamano);
+    aplicarTamanoTexto();
+}
+
+function aplicarTamanoTexto() {
+    const tamano = tamanosTexto[indiceTamano];
+    const elementosAfectados = document.querySelectorAll(
+        "#nombre-usuario, #rol-usuario, h1, h2, h3, .exam-title, .opciones-menu button, #btn-volver"
+    );
+    elementosAfectados.forEach(elem => {
+        elem.style.fontSize = tamano;
+    });
+}
+
+function toggleMenu() {
+    const menu = document.getElementById("opciones-menu");
+    if (menu) menu.classList.toggle("oculto");
+}
+
+window.addEventListener('click', (e) => {
+    const menu = document.getElementById("opciones-menu");
+    const btn = document.querySelector(".boton-menu");
+    if (menu && !menu.contains(e.target) && e.target !== btn) {
+        menu.classList.add("oculto");
+    }
+});

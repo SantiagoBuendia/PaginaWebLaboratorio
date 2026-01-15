@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar grupo</title>
+    <link rel="stylesheet" href="css/editarPerfil.css">
+</head>
+<body>
+    <div class="perfil-container">
+        <h2>Asignar grupo</h2>
+
+        <form action="/cgi-bin/PaginaWebLaboratorio.exe" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="grupo_id">Grupo:</label>
+                <select id="grupo_id" name="grupo_id" required>
+                    <option value="">Cargando grupos...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nombren">Nombre:</label>
+                <input type="text" id="nombren" name="nombren" required readonly>
+            </div>
+            <input type="hidden" id="id-hidden" name="estudiante_id">
+            <input type="hidden" name="accion" value="asignarEstudianteGrupo">
+            <div class="form-actions">
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="btn-volver">Volver</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/asignarCursoE.js"></script>
+</body>
+</html>

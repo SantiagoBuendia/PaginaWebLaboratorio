@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+    <link rel="stylesheet" href="css/simulador.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-top">
+
+        <button id="btn-volver" onclick="volverAlMenu()"><i class="fas fa-arrow-left"></i> Volver</button>
+    </div>
+
+    <div class="container-seguimiento">
+        <!-- Barra de Filtros -->
+        <div class="filtros-bar">
+
+            <div class="input-group">
+                <i class="fas fa-flask"></i>
+                <select id="filtro-experimento" onchange="cargarSimulaciones()">
+                    <option value="">Todos los experimentos</option>
+                    <option value="Fusion">Fusión</option>
+                    <option value="Evaporizacion">Evaporización</option>
+                    <option value="Solidificacion">Solidificación</option>
+                    <option value="Condensacion">Condensación</option>
+                </select>
+            </div>
+            <button class="btn-refresh" onclick="cargarSimulaciones()"><i class="fas fa-sync"></i> Actualizar</button>
+        </div>
+
+        <!-- Lista de Simulaciones -->
+        <div id="lista-simulaciones" class="grid-seguimiento">
+            <!-- Se carga dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Modal para Detalles -->
+    <div id="modal-detalle" class="modal oculto" onclick="cerrarModalSiClickFuera(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="det-titulo">Detalles de la Simulación</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+
+            <div class="det-grid">
+                <div class="det-section">
+                    <h3><i class="fas fa-chart-line"></i> Métricas Obtenidas</h3>
+                    <div class="tabla-wrapper">
+                        <table id="tabla-resultados">
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="2">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="det-section">
+                    <h3><i class="fas fa-history"></i> Línea de Tiempo (Eventos)</h3>
+                    <div id="timeline-eventos" class="timeline">
+                        <p>Cargando eventos...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-cerrar" onclick="cerrarModal()">
+                    <i class="fas fa-times"></i> Cerrar Reporte
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/simulador.js"></script>
+</body>
+</html>

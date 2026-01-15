@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido educativo</title>
+    <link rel="stylesheet" href="css/contenidoEducativo.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html"
+               onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/contenidoEducativo.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar">
+            </a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-volver" onclick="volverAlMenu()">Volver</button>
+
+    <div class="filtros">
+        <h1>Biblioteca de Recursos Educativos</h1>
+        <div class="filtros-fila">
+            <input type="text" id="busqueda" placeholder="Buscar por título, autor o palabra clave..." />
+            <select id="filtro-categoria">
+                <option value="">Todas las categorías</option>
+                <option value="quimica">Química</option>
+                <option value="guias">Guías</option>
+                <option value="video">Videos</option>
+                <option value="web">Artículos Web</option>
+            </select>
+            <button onclick="window.location.href='nuevoRecurso.html'"
+                    style="background-color:#28a745; color:white; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-size:15px;">
+                Agregar recurso
+            </button>
+        </div>
+
+        <div class="lista-usuarios">
+            <div id="tabla-recursos-container">
+                <div id="tabla-recursos">Cargando...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/contenidoEducativo.js"></script>
+</body>
+</html>

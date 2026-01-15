@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Examen - Plataforma</title>
+
+    <link rel="stylesheet" href="css/verExamen.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html"
+               onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/contenidoEducativo.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='/PaginaWebLaboratorio/img/none.png';" class="avatar">
+            </a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-volver" onclick="volverAlMenu()">
+        <i class="fas fa-arrow-left"></i> Volver
+    </button>
+
+    <div class="contenedor-principal">
+
+        <div class="lista-usuarios">
+            <h3><i class="fas fa-file-alt"></i>  Visualización del Examen</h3>
+
+            <div id="contenedor-preguntas">
+                <p style="text-align:center; padding:20px; color:#666;">
+                    <i class="fas fa-spinner fa-spin"></i> Cargando preguntas...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/verExamen.js"></script>
+</body>
+</html>

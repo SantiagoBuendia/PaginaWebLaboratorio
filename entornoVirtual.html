@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entorno virtual</title>
+    <link rel="stylesheet" href="css/entornoVirtua.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')"><img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar"></a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-top">
+
+        <button id="btn-volver" onclick="volverAlMenu()"><i class="fas fa-arrow-left"></i> Volver</button>
+    </div>
+
+    <div class="main-container">
+
+        <div class="main-container">
+            <h1 class="titulo-pagina">Laboratorio de Estados de la Materia</h1>
+
+            <div class="grid-experimentos">
+
+                <div class="card-experimento">
+                    <div class="card-content" onclick="abrirSimuladorVR('fusion')">
+                        <i class="icon fas fa-fire"></i>
+                        <h2>Fusión</h2>
+                        <p>Sólido a Líquido</p>
+                    </div>
+                    <a href="descargas/Fusion_VR.zip" class="btn-zip" download>
+                        <i class="fas fa-file-download"></i> Descargar .ZIP
+                    </a>
+                </div>
+
+                <div class="card-experimento">
+                    <div class="card-content" onclick="abrirSimuladorVR('evaporizacion')">
+                        <i class="icon fas fa-cloud-sun"></i>
+                        <h2>Evaporización</h2>
+                        <p>Líquido a Gaseoso</p>
+                    </div>
+                    <a href="descargas/Evaporizacion_VR.zip" class="btn-zip" download>
+                        <i class="fas fa-file-download"></i> Descargar .ZIP
+                    </a>
+                </div>
+
+                <div class="card-experimento">
+                    <div class="card-content" onclick="abrirSimuladorVR('solidificacion')">
+                        <i class="icon fas fa-snowflake"></i>
+                        <h2>Solidificación</h2>
+                        <p>Líquido a Sólido</p>
+                    </div>
+                    <a href="descargas/Solidificacion_VR.zip" class="btn-zip" download>
+                        <i class="fas fa-file-download"></i> Descargar .ZIP
+                    </a>
+                </div>
+
+                <div class="card-experimento">
+                    <div class="card-content" onclick="abrirSimuladorVR('condensacion')">
+                        <i class="icon fas fa-water"></i>
+                        <h2>Condensación</h2>
+                        <p>Gaseoso a Líquido</p>
+                    </div>
+                    <a href="descargas/Condensacion_VR.zip" class="btn-zip" download>
+                        <i class="fas fa-file-download"></i> Descargar .ZIP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/entornoVirtual.js"></script>
+</body>
+</html>

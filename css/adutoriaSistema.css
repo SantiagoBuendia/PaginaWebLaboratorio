@@ -1,0 +1,354 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+    animation: fadeInBackground 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@keyframes fadeInBackground {
+    from {
+        opacity: 0.8;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.header {
+    background-color: #003366;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+    .info strong {
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+    .info span {
+        font-size: 0.9em;
+        color: #e0e0e0;
+    }
+
+.menu-desplegable-container {
+    position: relative;
+    display: inline-block;
+}
+
+.boton-menu {
+    font-size: 22px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .boton-menu:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+.opciones-menu {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+    .opciones-menu button {
+        background: none;
+        border: none;
+        padding: 12px 18px;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+        color: #343a40;
+        font-size: 0.95em;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+        .opciones-menu button:hover {
+            background-color: #f0f0f0;
+            color: #003366;
+        }
+
+.oculto {
+    display: none !important;
+}
+
+#btn-volver {
+    margin: 20px 25px;
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+}
+
+    #btn-volver:hover {
+        background-color: #5a6268;
+        transform: translateY(-1px);
+    }
+
+.contenedor-principal {
+    display: flex;
+    padding: 20px 25px;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.lista-usuarios {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+    .lista-usuarios h3 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+        color: #1a2a6c;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+        .lista-usuarios h3 i {
+            margin-right: 10px;
+            color: #4facfe;
+        }
+
+.acciones-exportar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-exp {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+    color: white;
+}
+
+    .btn-exp.csv {
+        background-color: #28a745;
+    }
+
+        .btn-exp.csv:hover {
+            background-color: #218838;
+        }
+
+    .btn-exp.pdf {
+        background-color: #dc3545;
+    }
+
+        .btn-exp.pdf:hover {
+            background-color: #c82333;
+        }
+
+.filtros-auditoria {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    align-items: center;
+}
+
+.filtro-grupo {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px 12px;
+    flex: 1;
+}
+
+    .filtro-grupo input, .filtro-grupo select {
+        border: none;
+        outline: none;
+        padding: 8px;
+        width: 100%;
+        background: transparent;
+        font-size: 0.9em;
+    }
+
+#btn-limpiar-filtros {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    #btn-limpiar-filtros:hover {
+        background: #343a40;
+    }
+
+#tabla-usuarios {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+    table th, table td {
+        padding: 15px;
+        border: 1px solid #eee;
+        text-align: left;
+    }
+
+    table thead th {
+        background-color: #f8f9fa;
+        color: #555;
+        font-weight: 600;
+        border-bottom: 2px solid #ddd;
+        position: sticky;
+        top: 0;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #fcfcfc;
+    }
+
+    table tbody tr:hover {
+        background-color: #e9f5ff;
+    }
+
+body.modo-oscuro {
+    background-color: #121212;
+    color: #e2e6ea;
+}
+
+    body.modo-oscuro .header {
+        background-color: #000;
+    }
+
+    body.modo-oscuro .lista-usuarios, body.modo-oscuro .opciones-menu {
+        background-color: #1e1e1e;
+        border-color: #333;
+    }
+
+    body.modo-oscuro .filtros-auditoria {
+        background-color: #2c2c2c;
+        border-color: #444;
+    }
+
+    body.modo-oscuro .filtro-grupo {
+        background-color: #1e1e1e;
+        border-color: #555;
+    }
+
+        body.modo-oscuro .filtro-grupo input, body.modo-oscuro .filtro-grupo select {
+            color: white;
+        }
+
+    body.modo-oscuro table thead th {
+        background-color: #2c2c2c;
+        color: white;
+        border-bottom-color: #444;
+    }
+
+    body.modo-oscuro table td {
+        border-color: #333;
+    }
+
+    body.modo-oscuro table tbody tr:nth-child(even) {
+        background-color: #242424;
+    }
+
+    body.modo-oscuro table tbody tr:hover {
+        background-color: #333;
+    }
+
+@media (max-width: 900px) {
+    .contenedor-principal {
+        padding: 15px;
+    }
+
+    .filtros-auditoria {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .info {
+        display: none;
+    }
+
+    .filtros-auditoria {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

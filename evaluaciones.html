@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Exámenes - Laboratorio</title>
+    <link rel="stylesheet" href="css/evaluaciones.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="usuario">
+            <a href="http://localhost/PaginaWebLaboratorio/editarPerfil.html" onclick="localStorage.setItem('origen', 'http://localhost/PaginaWebLaboratorio/profesor.html')">
+                <img id="profile-pic" src="" alt="Foto de perfil" onerror="this.onerror=null; this.src='img/none.png';" class="avatar">
+            </a>
+            <div class="info">
+                <strong id="nombre-usuario">Nombre</strong>
+                <span id="rol-usuario">Rol</span>
+            </div>
+        </div>
+        <div class="menu-desplegable-container">
+            <button class="boton-menu" onclick="toggleMenu()">≡</button>
+            <div id="opciones-menu" class="opciones-menu oculto">
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="cambiarTexto()">Cambiar Texto</button>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-volver" onclick="volverAlMenu()">
+        <i class="fas fa-arrow-left"></i> Volver
+    </button>
+
+    <div class="contenedor-principal">
+        <div class="lista-usuarios">
+            <h3><i class="fas fa-edit"></i> Exámenes Disponibles</h3>
+            <p>A continuación se muestran las evaluaciones de tus grupos:</p>
+
+            <div id="contenedor-lista-examenes">
+                <p style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Cargando exámenes...</p>
+            </div>
+        </div>
+    </div>
+    <script src="js/evaluaciones.js"></script>
+</body>
+</html>

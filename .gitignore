@@ -1,0 +1,12 @@
+﻿.vs/
+bin/
+obj/
+descargas/*.zip
+node_modules/
+Library/
+Temp/
+Build/
+*.exe
+*.zip
+
+

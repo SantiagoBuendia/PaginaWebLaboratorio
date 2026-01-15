@@ -208,8 +208,7 @@ function abrirSimuladorVR(tipo) {
         })
         .then(data => {
             console.log("Respuesta del servidor para " + tipo + ":", data);
-            const msg = document.createElement("div");
-            msg.innerHTML = "Abriendo " + tipo + "...";
+
             msg.style = "position:fixed; top:20px; right:20px; background:green; color:white; padding:10px; border-radius:5px; z-index:1000;";
             document.body.appendChild(msg);
             setTimeout(() => msg.remove(), 3000);

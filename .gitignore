@@ -1,6 +1,7 @@
 ﻿.vs/
 bin/
 obj/
+<<<<<<< HEAD
 descargas/*.zip
 node_modules/
 Library/
@@ -8,5 +9,4 @@ Temp/
 Build/
 *.exe
 *.zip
-
 

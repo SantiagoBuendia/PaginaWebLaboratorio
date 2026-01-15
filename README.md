@@ -1,15 +1,8 @@
-🔹 Paleta 1: Ciencia moderna / Fresca
+Se debe crear una carpeta denominada “descargas”, en la cual se almacenarán los archivos comprimidos (.zip) correspondientes a los simuladores.
 
-Azul químico → #1565C0 (confianza, agua, investigación)
+A continuación, se proporciona el enlace a un repositorio en Google Drive que contiene los cuatro simuladores, cada uno con su respectivo archivo ejecutable .apk necesario para iniciar la simulación:
 
-Verde reactivo → #2E7D32 (naturaleza, vida, biología/química orgánica)
+🔗 Enlace de descarga:
+https://drive.google.com/drive/folders/1LrjqW-kJF4va5ksBgl-6CujbdrvPB9vg?usp=drive_link
 
-👉 Esta paleta transmite limpieza, frescura y ciencia aplicada. Ideal si tu web es educativa o de investigación.
-
-🔹 Paleta 2: Tecnología / Laboratorio
-
-Turquesa molecular → #26A69A (innovación, soluciones químicas)
-
-Gris grafito → #37474F (neutralidad, profesionalismo, contraste)
-
-👉 Esta paleta da un aire moderno y profesional, muy de laboratorio y tecnología.
+Una vez descargados los archivos .zip, estos deberán estar dentro de la carpeta descargas.

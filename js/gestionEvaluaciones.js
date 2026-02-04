@@ -180,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     examenIdActual = data.examen_id;
                     document.getElementById("examen_id").value = examenIdActual;
                     preguntasContainer.classList.remove("hidden");
+
+                    document.getElementById("finalizar-container").classList.remove("hidden");
+                    
                     alert("Examen creado con éxito. Ahora puedes agregar preguntas.");
                     formExamen.reset();
 

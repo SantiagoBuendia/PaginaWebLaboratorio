@@ -99,6 +99,12 @@
                         </button>
                     </form>
 
+                    <div id="finalizar-container" class="btn-primary" ">
+                        <button type="button" class="btn-success" onclick="finalizarExamen()">
+                            <i class="fas fa-check-circle"></i> Finalizar Examen
+                        </button>
+                    </div>
+                    
                     <div id="opciones-container" class="form-section hidden">
                         <h4>Opciones de respuesta</h4>
                         <form id="form-opciones" method="post" action="/cgi-bin/PaginaWebLaboratorio.exe">
@@ -114,16 +120,6 @@
                             </button>
                         </form>
 
-                        <div id="finalizar-container" class="btn-primary" ">
-                            <button type="button" class="btn-success" onclick="finalizarExamen()">
-                                <i class="fas fa-check-circle"></i> Finalizar Examen
-                            </button>
-                        </div>
-
-                        <div id="mensaje-final" class="hidden" style="text-align:center; margin-top:20px;">
-                            <h3> Examen finalizado correctamente</h3>
-                            <p>Puedes revisarlo en la sección <strong>Mis Exámenes</strong>.</p>
-                        </div>
                     </div>
                 </div>
             </div>

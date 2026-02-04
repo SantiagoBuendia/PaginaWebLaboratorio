@@ -182,7 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     preguntasContainer.classList.remove("hidden");
 
                     document.getElementById("finalizar-container").classList.remove("hidden");
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> c204224 (Coreecion boton finalizar examen)
                     alert("Examen creado con éxito. Ahora puedes agregar preguntas.");
                     formExamen.reset();
 

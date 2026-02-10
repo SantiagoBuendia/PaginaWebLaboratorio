@@ -10,7 +10,7 @@
 const token = getToken();
 if (!token) {
     alert("Sesión expirada o no iniciada. Redirigiendo al inicio de sesión.");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -42,7 +42,7 @@ function cerrarSesion() {
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function toggleMenu() {
@@ -59,7 +59,7 @@ window.addEventListener('click', function (event) {
 });
 
 function volverAlMenu() {
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/profesor.html';
+    window.location.href = '/PaginaWebLaboratorio/profesor.html';
 }
 
 let modoOscuro = false;
@@ -182,11 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     preguntasContainer.classList.remove("hidden");
 
                     document.getElementById("finalizar-container").classList.remove("hidden");
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> c204224 (Coreecion boton finalizar examen)
                     alert("Examen creado con éxito. Ahora puedes agregar preguntas.");
                     formExamen.reset();
 
@@ -221,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     preguntaIdActual = data.pregunta_id;
                     document.getElementById("pregunta_id").value = preguntaIdActual;
                     opcionesContainer.classList.remove("hidden");
+                    document.getElementById("finalizar-container").classList.add("hidden"); 
                     opcionesLista.innerHTML = "";
                     agregarOpcion();
                     alert("Pregunta agregada con éxito. Ahora agrega las opciones de respuesta.");
@@ -276,6 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     opcionesLista.innerHTML = "";
                     opcionesContainer.classList.add("hidden");
 
+                    document.getElementById("finalizar-container").classList.remove("hidden"); 
+
                     formPregunta.reset();
                     document.getElementById("examen_id").value = examenIdActual;
                     preguntasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -293,17 +292,24 @@ document.addEventListener("DOMContentLoaded", () => {
     window.agregarOpcion = function () {
         const index = opcionesLista.children.length;
         const div = document.createElement('div');
-        div.classList.add('opcion-item');
+        div.classList.add('opcion-card-item'); // Nueva clase CSS
 
         div.innerHTML = `
-            <input type="text" name="opcion_texto_${index}" placeholder="Opción ${index + 1}" required>
-            <label>
-                <input type="checkbox" name="opcion_correcta_${index}"> Correcta
+        <div class="opcion-input-group">
+            <div class="opcion-numero">${index + 1}</div>
+            <input type="text" name="opcion_texto_${index}" placeholder="Escribe la respuesta aquí..." required>
+        </div>
+        <div class="opcion-actions">
+            <label class="check-correcta">
+                <input type="checkbox" name="opcion_correcta_${index}">
+                <span class="checkmark"><i class="fas fa-check"></i></span>
+                Correcta
             </label>
-            <button type="button" class="btn-remove-option" onclick="this.parentNode.remove()">
-                <i class="fas fa-times"></i>
+            <button type="button" class="btn-eliminar-opcion" onclick="this.closest('.opcion-card-item').remove()" title="Eliminar opción">
+                <i class="fas fa-trash-alt"></i>
             </button>
-        `;
+        </div>
+    `;
         opcionesLista.appendChild(div);
     };
 });

@@ -10,7 +10,7 @@
 const token = getToken();
 if (!token) {
     alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -40,7 +40,7 @@ function cerrarSesion() {
     document.cookie = "usuario=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function toggleMenu() {
@@ -107,5 +107,5 @@ document.getElementById("tipo").addEventListener("change", function () {
 });
 
 document.getElementById("btn-volver").addEventListener("click", () => {
-    window.location.href = "http://localhost/PaginaWebLaboratorio/contenidoEducativo.html";
+    window.location.href = "/PaginaWebLaboratorio/contenidoEducativo.html";
 });

@@ -12,7 +12,7 @@ console.log("Token recibido:", token);
 
 if (!token) {
     alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -30,18 +30,18 @@ const id = getCookie('id');
 
 if (!token) {
     alert("Sesión no válida. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 else if (rol !== 'administrador') {
     alert("Acceso denegado: No tienes permisos de administrador.");
 
     if (rol === 'profesor') {
-        window.location.href = 'http://localhost/PaginaWebLaboratorio/profesor.html';
+        window.location.href = '/PaginaWebLaboratorio/profesor.html';
     } else if (rolSesion === 'estudiante') {
-        window.location.href = 'http://localhost/PaginaWebLaboratorio/estudiante.html';
+        window.location.href = '/PaginaWebLaboratorio/estudiante.html';
     } else {
-        window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+        window.location.href = '/PaginaWebLaboratorio/index.html';
     }
 }
 
@@ -65,7 +65,7 @@ function cerrarSesion() {
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function toggleMenu() {
@@ -168,7 +168,7 @@ function cargarUsuarios() {
         .then((res) => res.text())
         .then((html) => {
             document.getElementById("tabla-usuarios").innerHTML = html;
-            // IMPORTANTE: Aplicar el filtro por si el usuario ya tenía algo escrito
+            
             filtrarTabla();
         })
         .catch(() => {

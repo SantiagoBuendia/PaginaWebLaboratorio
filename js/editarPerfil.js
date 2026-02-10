@@ -52,14 +52,14 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("btn-volver").addEventListener("click", () => {
-        let destino = "http://localhost/PaginaWebLaboratorio/index.html";
+        let destino = "/PaginaWebLaboratorio/index.html";
 
         if (rol === "administrador") {
-            destino = "http://localhost/PaginaWebLaboratorio/administrador.html";
+            destino = "/PaginaWebLaboratorio/administrador.html";
         } else if (rol === "profesor") {
-            destino = "http://localhost/PaginaWebLaboratorio/profesor.html";
+            destino = "/PaginaWebLaboratorio/profesor.html";
         } else if (rol === "estudiante") {
-            destino = "http://localhost/PaginaWebLaboratorio/estudiante.html";
+            destino = "/PaginaWebLaboratorio/estudiante.html";
         }
 
         window.location.href = destino;

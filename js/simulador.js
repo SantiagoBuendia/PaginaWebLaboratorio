@@ -79,7 +79,6 @@ function aplicarTamanoTexto() {
         elem.style.fontSize = tamano;
     });
 
-    // Ajustar tamaños específicos proporcionalmente
     const multiplicador = indiceTamano === 0 ? 1 : indiceTamano === 1 ? 1.15 : 1.3;
 
     const elementosEspeciales = document.querySelectorAll('.card-header-seg');
@@ -113,7 +112,6 @@ function volverAlMenu() {
     window.location.href = localStorage.getItem('origen') || 'menu.html';
 }
 
-// ========== LÓGICA DE SEGUIMIENTO (TRACKING) ==========
 
 async function cargarSimulaciones() {
     const contenedor = document.getElementById('lista-simulaciones');
@@ -237,7 +235,7 @@ function cerrarModal() {
     const modal = document.getElementById('modal-detalle');
     if (modal) {
         modal.classList.add('oculto');
-        document.body.style.overflow = ''; // Restaurar scroll
+        document.body.style.overflow = '';
     }
 }
 

@@ -16,7 +16,7 @@ console.log("Token recibido:", token);
 
 if (!token) {
     alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("btn-volver").addEventListener("click", () => {
-        window.location.href = "http://localhost/PaginaWebLaboratorio/gestionUsuarios.html";
+        window.location.href = "/PaginaWebLaboratorio/gestionUsuarios.html";
     });
 
     document.getElementById("ver-contra").addEventListener("change", function () {

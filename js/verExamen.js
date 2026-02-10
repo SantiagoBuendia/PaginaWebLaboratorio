@@ -39,7 +39,7 @@ console.log("Token recibido:", token);
 
 if (!token) {
     alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -71,7 +71,7 @@ function cerrarSesion() {
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function toggleMenu() {
@@ -117,5 +117,5 @@ window.addEventListener('click', function (event) {
 });
 
 document.getElementById("btn-volver").addEventListener("click", () => {
-    window.location.href = "http://localhost/PaginaWebLaboratorio/gestionEvaluaciones.html";
+    window.location.href = "/PaginaWebLaboratorio/gestionEvaluaciones.html";
 });

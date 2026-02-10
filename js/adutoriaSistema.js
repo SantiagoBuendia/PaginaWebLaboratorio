@@ -12,7 +12,7 @@ console.log("Token recibido:", token);
 
 if (!token) {
     alert("No hay token. Redirigiendo...");
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function getCookie(nombre) {
@@ -44,7 +44,7 @@ function cerrarSesion() {
     document.cookie = "rol=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    window.location.href = 'http://localhost/PaginaWebLaboratorio/index.html';
+    window.location.href = '/PaginaWebLaboratorio/index.html';
 }
 
 function toggleMenu() {
@@ -89,7 +89,7 @@ window.addEventListener('click', function (event) {
 });
 
 function volverAlMenu() {
-    window.location.href = "http://localhost/PaginaWebLaboratorio/administrador.html";
+    window.location.href = "/PaginaWebLaboratorio/administrador.html";
 }
 function cargarUsuarios() {
     fetch("/cgi-bin/PaginaWebLaboratorio.exe?accion=listarAu")
